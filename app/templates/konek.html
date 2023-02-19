@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title> Sejati</title>
+      <meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/scb-production-plugins.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/scb-production.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/scb-skins.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/styles.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/scb-rtl.min.css') }}">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/ico.png') }}" type="image">
+		<link rel="icon" href="{{ url_for('static', filename='img/favicon/ico.png') }}" type="image">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	</head>
+	<body style="background:white; margin-top:20px;">
+        <div class="container">
+            <section id="widget-grid" class="">
+                <div class="row no-mg">
+                     <article class="col-md-6 col-md-offset-3 col-xs-12 no-pd">
+                           <div class="jarviswidget jarviswidget-color-blueDark no-mg" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="true" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                              <header>
+                                 <span class="widget-icon"> <i class="fa fa-th-list txt-color-white"></i> </span>
+                                 <h2>Setup Bank Data</h2>
+                              </header>
+                              <div>
+                                 <div class="widget-body">
+                                    <div class="row no-mg">
+
+                                       <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                          <label class="menu-item-parent">Host</label>
+                                          <input type="text" id="host" class="form-control input-sm text-center">
+                                          <script>enKey('#host', '#dbname');</script>
+                                       </div>
+                                       <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                          <label class="menu-item-parent">DB Name</label>
+                                          <input type="text" id="dbname" class="form-control input-sm text-center">
+                                          <script>enKey('#dbname', '#simpan');</script>
+                                       </div>
+                                    </div>
+
+                                 </div>
+                                 <div class="widget-footer">
+                                    <div class="col-md-12 col-xs-12 no-pd pd-left-5 pd-right-5 pd-bottom-5">
+                                          <div class="demo-btns">
+                                             <button type="button" id="simpan" class="btn btn-primary btn-sm res-btn" value="Simpan" onclick="tombol(this.value)">
+                                                <i class="fa fa-spinner"></i>
+                                                <span> Proses</span>
+                                             </button>
+                                          </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                     </article>
+                </div>
+            </section>
+        </div>
+
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/app.config.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/plugin/jquery-touch/jquery.ui.touch-punch.min.js') }}"></script> 
+		<script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/smartwidgets/jarvis.widget.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/funct.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script>
+   </body>
+   <script>
+         $(document).ready(function(){
+               pageSetUp();
+               $('#host').focus();
+         });
+
+         function tombol(val){
+            if(val=='Simpan'){
+               var host = $('#host').val(), dbname = $('#dbname').val();
+               if(host == ''){ msg_alert_warning(null, '#host');
+               }else if(dbname == ''){ msg_alert_warning(null, '#dbname');
+               }else{
+                     var box = bootbox.confirm({
+                        title: 'Konfirmasi',
+                        message: 'Lanjutkan Proses?',
+                        buttons: {
+                           confirm: { label: 'Ya', className: 'btn-primary' },
+                           cancel: { label: 'Tidak', className: 'btn-danger' }
+                        },
+                        callback: function(result){
+                           if(result){
+                                 waitingDialog.show('Proses...', {dialogSize:'sm'});
+                                 $.ajax({
+                                    type    : 'POST',
+                                    url     : '/simpanip',
+                                    dataType: 'json',
+                                    data    : { 'host':host, 'dbname':dbname },
+                                    success: function(response){
+                                       waitingDialog.hide();
+                                       if(response.status=='1'){
+                                             var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                             var box = bootbox.alert(msg);
+                                             box.on('hidden.bs.modal', function(){
+                                                location.reload();
+                                             });
+                                       }else{
+                                             msg_alert_warning('Data gagal diproses !', '#host');
+                                       }
+                                    },
+                                    error: function(error){
+                                       console.log(error);
+                                       waitingDialog.hide();
+                                       msg_alert_warning('Data gagal diproses !', '#host');
+                                    }
+                                 });
+                                 
+                           }
+
+                        }
+                     });
+               }
+            }
+         };
+      </script>
+</html>

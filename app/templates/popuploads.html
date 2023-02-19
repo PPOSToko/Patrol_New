@@ -1,0 +1,173 @@
+<div id="mUploads" class="modal modal-dialog-md fade" data-backdrop="static" tabindex="-1" role="dialog">
+   <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" rel="tooltip" title="Tekan Tombol 'ESC' untuk keluar" data-placement="left">
+               &times;
+            </button>
+            <h4 class="modal-title"><i class="fa fa-edit"></i> Import Data</h4>
+         </div>
+
+         <div class="modal-body">
+            <form id='upload-file' method="POST" enctype="multipart/form-data">
+               <fieldset>
+               <div class="col-md-12 col-xs-12 no-pd">
+                  <div class="form-group col-md-12 col-xs-12 pd-left-2 pd-right-2">
+                     {% if xform=='import-pasien' %}
+                        <label class="menu-item-parent">Pilih File :</label>
+                        <input type="file" name="file" id="ifile" accept=".xls, .xlsx" class="form-control-file" data-show-upload="true">
+                     {% elif xform=='import-logo-instansi' %}
+                        <label class="menu-item-parent">Pilih File :</label>
+                        <input type="file" name="file" id="ifile" accept=".png, .jpg, .jpeg" class="form-control-file" data-show-upload="true">
+                     {% endif %}
+                  </div>
+               </div>
+               </fieldset>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <fieldset>
+               <div class="demo-btns pull-right">
+                  <button id='proses' class="btn btn-primary btn-sm res-btn">
+                     <i class="fa fa-spinner"></i><span> Proses</span>
+                  </button>
+                  <button id="batal" class="btn btn-danger btn-sm res-btn">
+                     <i class="fa fa-sign-out"></i><span> Batal</span>
+                  </button>
+               </div>
+            </fieldset>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   var xform = '{{xform}}';
+
+   $('#mUploads').on('show.bs.modal', function() {
+      $(this).show();
+      setModalMaxHeight(this);
+   });
+
+   $(window).resize(function() {
+      if ($('#mUploads.in').length != 0) {
+         setModalMaxHeight($('#mUploads.in'));
+      }
+   });
+
+   $(function(){
+      $('#mUploads').modal();
+   });
+
+   $(document).ready(function(){
+      pageSetUp();
+      var responsiveHelper_dt_basic = undefined;
+      var responsiveHelper_datatable_fixed_column = undefined;
+      var responsiveHelper_datatable_col_reorder = undefined;
+      var responsiveHelper_datatable_tabletools = undefined;
+      var breakpointDefinition = {
+         tablet : 1024,
+         phone : 480
+      };
+
+      $('#mUploads').on('shown.bs.modal', function () {
+         if(xform=='import-bukutarif'){
+            $('#nmkelas').focus();
+         }else{
+            $('#ifile').focus()
+         }
+      });
+
+      $('#mUploads').on('hidden.bs.modal', function(){
+         if(xform=='import-logo-instansi'){
+            $('#ilogo').attr('src','static/img/'+$('#nmfile').val());
+         }
+      });
+      
+      $('#mUploads').on('hide.bs.modal', function(){
+         
+      });
+   });
+
+   $('#proses').click(function(){
+      if(xform=='import-pasien'){
+         var form_data = new FormData($("#upload-file")[0]);
+         if($('#ifile').val().length == 0){
+            msg_alert_warning("Tidak ada file yang akan di import !", "#ifile");
+         }else{
+            $.ajax({
+               url: '/importdtpasien',
+               type: 'POST',
+               cache: false,
+               contentType: false,
+               processData: false,
+               data: form_data,
+               async: false,
+               success: function(response) {
+                  waitingDialog.hide();
+                  if(response.status == 0){
+                     msg_alert_warning(response.msg, '#ifile');
+                  }else if(response.status == 1){
+                     var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                     var box = bootbox.alert(msg);
+                     box.on('hidden.bs.modal', function(){
+                        $('#mUploads').modal('hide');
+                        $('#tblpasien').DataTable().ajax.reload();
+                     });
+                  }
+               },
+               error : function(error){
+                  console.log(error);
+                  waitingDialog.hide();
+                  msg_alert_warning(response.msg, '#ifile');
+               }
+            });
+         }
+
+      }else if(xform=='import-logo-instansi'){
+         var form_data = new FormData($("#upload-file")[0]);
+         if($('#ifile').val().length == 0){
+            msg_alert_warning("Tidak ada file yang akan di import !", "#ifile");
+         }else{
+            waitingDialog.show('Proses...', {dialogSize:'sm'});
+            $.ajax({
+               url: '/getlogo',
+               type: 'POST',
+               cache: false,
+               contentType: false,
+               processData: false,
+               data: form_data,
+               async: false,
+               success: function(response) {
+                  waitingDialog.hide();
+                  if(response.status == 0){
+                     msg_alert_warning(response.msg, '#ifile');
+                  }else if(response.status == 1){
+                     var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                     var box = bootbox.alert(msg);
+                     box.on('hidden.bs.modal', function(){
+                        $('#mUploads').modal('hide');
+                        $('#ilogo').attr('src','static/uploads/'+response.img);
+                        $('#nmfile').val(response.img);
+                     });
+                  }
+               },
+               error : function(error){
+                  console.log(error);
+                  waitingDialog.hide();
+                  if(error.status==403){
+                     msg_server_reloading();
+                  }else{
+                     msg_alert_warning(response.msg, '#ifile');
+                  }
+               }
+            });
+         }
+
+      }
+   });
+
+   $('#batal').click(function(){
+      $('#mUploads').modal('hide');
+   });
+</script>

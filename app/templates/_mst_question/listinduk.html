@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png"> -->
+      <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <title>Q-Patrol</title>
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+      <!-- Nucleo Icons -->
+      <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+      <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+      <!-- Font Awesome Icons -->
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <!-- material Icons -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+      <!-- CSS Files -->
+      <link id="pagestyle" href="./assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+      <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <title>Q-Patrol</title>
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+      <!-- Nucleo Icons -->
+      <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+      <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+      <!-- Font Awesome Icons -->
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <!-- material Icons -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+      <!-- CSS Files -->
+      <link id="pagestyle" href="{{ url_for('static', filename='css/material-dashboard.css') }}"  rel="stylesheet" />
+    </head>
+    <body class="g-sidenav-show  bg-gray-100">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+          <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+            </nav>
+            <ul class="navbar-nav  justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/home">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10 ">home</i>
+                      <span class="nav-link-text ms-1">Home</span>
+                    </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/logout">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10">logout</i>
+                      <span class="nav-link-text ms-1">Sign Out</span>
+                    </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>     
+        <div class ="mask gradient-custom"></div>
+        <div class="container-fluid py-4">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2" >
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Master Induk</h6>
+                </div>
+                </div>
+                    <!-- Modal input induk -->
+                <div class="modal fade" id="inputinduk"   data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="submitinduk" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title font-weight-normal" id="exampleModalLabel"> Input Induk</h5>
+                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="inputEmail3">Kode Induk</label>
+                                        <div class="input-group input-group-outline my-3">
+                                            <input type="text" id="iid_induk" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3">Nama Induk</label>
+                                        <div class="input-group input-group-outline my-3">
+                                            <input type="text" id="inama_induk" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="simpan_induk();">Accept</button>
+                                        <script>
+                                            function simpan_induk(){
+                                                var nminduk  = $('#inama_induk').val();
+                                                bootbox.confirm({
+                                                    message: "Simpan data induk?",
+                                                    buttons: {
+                                                        confirm: {
+                                                            label: 'Yes',
+                                                            className: 'btn-success'
+                                                        },
+                                                        cancel: {
+                                                            label: 'No',
+                                                            className: 'btn-danger'
+                                                        }
+                                                    },
+                                                    callback: function (result) {
+                                                        // console.log('This was logged in the callback: ' + result);
+                                                        if(result){
+                                                            $.ajax({
+                                                                type    : 'POST',
+                                                                url     : '/simpaninduk',
+                                                                dataType: 'json',
+                                                                data    : {
+                                                                'nminduk':nminduk
+                                                                },
+                                                                success : function(response){
+                                                                waitingDialog.hide();
+                                                                if(response.status=='1'){
+                                                                    $('#nama_induk').focus();
+                                                                    var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                                                    var box = bootbox.alert(msg);
+                                                                    box.on('hidden.bs.modal', function(){
+                                                                        showinduk();
+                                                                    });
+                                                                }else{
+                                                                    msg_alert_warning(response.msg, '#nama_induk');
+                                                                }
+                                                                },
+                                                                error: function(error){
+                                                                console.log(error);
+                                                                waitingDialog.hide();
+                                                                if(error.status == 403){
+                                                                    msg_server_reloading();
+                                                                }else{
+                                                                    msg_alert_warning('Data gagal diproses !', '#nmsp');
+                                                                }
+                                                                }
+                                                            })
+                                                        }
+
+                                                    }
+                                                });        
+
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="editinduk"   data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title font-weight-normal" id="exampleModalLabel"> Edit Induk</h5>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="kode_induk">Kode Induk</label>
+                                            <div class="input-group input-group-outline my-2">
+                                                <input type="text" id="eid_induk" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nama_induk">Nama Induk</label>
+                                            <div class="input-group input-group-outline my-2">
+                                                <input type="text" id="enama_induk" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status_employee">Status</label>
+                                    <div class="input-group input-group-outline my-2">
+                                        <select class="form-control" id="estatus_employee">
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Non Aktif</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="edit_induk();">Accept</button>
+                                </div>
+                                <script>
+                                    function edit_induk(){
+                                        var enminduk  = $('#enama_induk').val(),eidinduk  = $('#eid_induk').val(),estatus  = $('#estatus_employee').val();
+                                        bootbox.confirm({
+                                            message: "Edit data induk?",
+                                            buttons: {
+                                                confirm: {
+                                                    label: 'Yes',
+                                                    className: 'btn-success'
+                                                },
+                                                cancel: {
+                                                    label: 'No',
+                                                    className: 'btn-danger'
+                                                }
+                                            },
+                                            callback: function (result) {
+                                                // console.log('This was logged in the callback: ' + result);
+                                                if(result){
+                                                    $.ajax({
+                                                        type    : 'POST',
+                                                        url     : '/editinduk',
+                                                        dataType: 'json',
+                                                        data    : {
+                                                        'nminduk':enminduk,'idinduk':eidinduk,'status':estatus
+                                                        },
+                                                        success : function(response){
+                                                        waitingDialog.hide();
+                                                        if(response.status=='1'){
+                                                            $('#nama_induk').focus();
+                                                            var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                                            var box = bootbox.alert(msg);
+                                                            box.on('hidden.bs.modal', function(){
+                                                                showinduk();
+                                                            });
+                                                        }else{
+                                                            msg_alert_warning(response.msg, '#nama_induk');
+                                                        }
+                                                        },
+                                                        error: function(error){
+                                                        console.log(error);
+                                                        waitingDialog.hide();
+                                                        if(error.status == 403){
+                                                            msg_server_reloading();
+                                                        }else{
+                                                            msg_alert_warning('Data gagal diproses !', '#nmsp');
+                                                        }
+                                                        }
+                                                    })
+                                                }
+
+                                            }
+                                        });        
+
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid py-4">
+                    <div class="form-group">
+                        <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#inputinduk" >Input induk</button>
+                    </div>
+                    <div class="table-responsive p-0">
+                        <table  class="table align-items-center mb-0" id="tableinduk">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center ">Kode</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left ">Nama Induk</th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left">Status</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-12mb-lg-0 mb-4">
+                    <div class="copyright text-center text-sm text-muted text-shadow">
+                        <center><a href="http://192.168.30.3/support/" class="font-weight-bold" target="_blank" style="color: rgb(0, 0, 0);">Copyright ©IT - PT.Cahayajakarta @2022</a></center>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+    <script>
+        $(document).ready(function(){
+            showinduk();
+        });
+
+        function showinduk(){
+          var table = $('#tableinduk').DataTable({
+            "ajax":{
+                "url":"/viewinduk",
+
+                "error": function(){
+                    msg_server_reloading();
+                }
+              },
+              // ({'id_pertanyaan':id_pertanyaan,'nminduk':nminduk,'nmpoint':nmpoint,'pertanyaan':pertanyaan,'std_jawaban':std_jawaban,'eff_from':eff_from,'eff_to':eff_to})
+              "columns":[
+                {"data": "id_induk", "className":"align-middle text-center text-sm","width":"5%",  "targets":"0"},
+                {"data": "description","className":"align-middle text-left text-sm", "targets":"1"},
+                {"data": "status","className":"align-middle text-left text-sm", "targets":"1"},
+
+                {"data": null, "orderable": false, "className":"text-center", "width":"5%", "targets":"7",
+                    "render":function(data){
+                      return '<button id="bDetil" data-toggle="tooltip" data-placement="left"  data-original-title="Detil" style="background:initial;border:none;" >'+
+                            '<i class="fa fa-edit txt-color-blue"></i>'+
+                            '</button>' 
+                            // +
+                            // '<button id="blist" data-toggle="tooltip" data-placement="left"  data-original-title="Detil" style="background:initial;border:none;" >'+
+                            // '<i class="fa fa-list txt-color-blue"></i>'+
+                            // '</button>'
+                            
+                    //   return '<a class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-original-title="Edit induk" onclick="edit_induk(data.id_induk);">' +
+                    //          '    <span class="badge badge-sm bg-gradient-success">Edit</span> '+
+                    //          '</a>'
+
+                    }
+                }
+              ],
+              "destroy": true,
+              "deferRender": true,
+              "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+                "t"+
+                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+              "oLanguage": {
+                "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+                "sInfo": "Total : _TOTAL_ Data",
+                "sInfoEmpty":"Total : _MAX_ data",
+                "sInfoFiltered":"",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "<strong class='text-danger'><i class='fa fa-warning'></i> Data tidak ditemukan !</strong>",
+                "sLoadingRecords": "<strong><i class='fa fa-spinner fa-spin'></i> Memuat data ...</strong>",
+                "sEmptyTable": "<strong class='text-danger'><i class='fa fa-warning'></i> Tidak ada data !</strong>",
+                "oPaginate": {
+                    "sNext":">",
+                    "sPrevious":"<"
+                }
+              },
+              "order": [0, "asc"],
+              // // "sScrollY": auto_height_table('#showklasifikasipsn'),
+              "autoWidth" : false,
+              "responsive": true,
+              "ordering": false,
+              "lengthChange": true,
+              
+
+          });
+          $('#tableinduk tbody').on( 'click', 'button', function(){
+              var data = table.row($(this).closest('tr')).data();
+              if(this.id=='bDetil'){
+                $('#eid_induk').val(data.id_induk);
+                $('#enama_induk').val(data.description);
+                if (data.status = "Aktif"){
+                    $('#estatus_employee').val(1);
+                }else{
+                    $('#estatus_employee').val(0);
+                }
+                $('#editinduk').modal('show'); 
+              }else if(this.id=='blist'){
+                document.location.href = "/mst-induk-point";
+                // window.open("/cetakpemasok/" +data.kdsp,"Cetak Form Verifikasi Pemasok","dialog=yes","scrollbars=yes");
+              }
+          });
+          
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/chartjs.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/funct.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/create.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.colVis.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.tableTools.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap-table-auto-refresh.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script>
+    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/material-dashboard.min.js') }}"></script>
+</html>

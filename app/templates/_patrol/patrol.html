@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Q-Patrol</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link
+          href="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/css/smart_wizard_all.min.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+        <!-- Nucleo Icons -->
+        <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+        <!-- Font Awesome Icons -->
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <!-- material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <!-- CSS Files -->
+        <link id="pagestyle" href="{{ url_for('static', filename='css/material-dashboard.css') }}"  rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/js/jquery.smartWizard.min.js"
+            type="text/javascript"
+        ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"
+        ></script>
+        <script>
+            $(document).ready(function () {
+                // SmartWizard initialize
+                
+                var xttanya = '{{selesai}}';
+                var xmulai = '{{mulai2}}';
+                var sesuai = '{{sesuai}}';
+                var tdksesuai = '{{tdksesuai}}';
+                var psesuai = '{{psesuai}}';
+                var ptdksesuai = '{{ptdksesuai}}';
+                if (parseInt(xmulai) > parseInt(xttanya)){
+                    // bootbox.alert("patrol selesai semua pertanyaan sudah terjawab <br>jumlah pertanyaan = ..... </br>jawaban sesuai = ..... (.....%)<br>jawaban tidak sesuai = ..... (.....%)</br>", function() { 
+                    //     document.location.href = "/home";
+                    // });
+                    bootbox.alert("Patrol selesai !!!!<Br>Semua pertanyaan sudah terjawab <br>jumlah pertanyaan = " + xttanya + " </br>Jawaban sesuai = " + sesuai + " ( " + psesuai + " %)<br>jawaban tidak sesuai = " + tdksesuai + " ("+ tdksesuai + " %) </br>", function() { 
+                        document.location.href = "/home";
+                    });
+                    
+                }
+           
+            });
+            //Open the dialog box when the button is clicked.
+            function actstoppatrol(aksi){
+                var status = aksi,idpatrol = $('#idpatrol').val();
+                $.ajax({
+                  type    : 'POST',
+                  url     : '/stophasilpatrol',
+                  dataType: 'json',
+                  data    : {
+                    'idpatrol':idpatrol,'status':status
+                  },
+                  success : function(response){
+                    if(response.status=='1'){
+                        document.location.href = "/home";
+                    //   window.location.href = '/mulaipatrol?idpatrol=' + idpatrol;
+                    }else{
+                        msg_alert_warning(response.msg, '#nmsp');
+                    }
+                  },
+                  error: function(error){
+                    console.log(error);
+                    waitingDialog.hide();
+                    if(error.status == 403){
+                        msg_server_reloading();
+                    }else{
+                        msg_alert_warning('Data gagal diproses !', '#nmsp');
+                    }
+                  }
+              })
+
+
+            }
+            function stoppatrol(){
+                bootbox.prompt({
+                    title: "Anda akan men-stop patrol!",
+                    message: '<p>Silakan pilih opsi di bawah ini:</p>',
+                    inputType: 'radio',
+                    inputOptions: [
+                    {
+                        text: 'Tidak jadi stop kembali ke tampilan pertanyaan patrol',
+                        value: '1',
+                    },
+                    {
+                        text: 'Batalkan patrol, akan diulang dari awal (progress tidak disimpan)',
+                        value: 'Batal',
+                    },
+                    {
+                        text: 'Patrol belum selesai,masih akan dilanjutkan nanti',
+                        value: 'Unfinish',
+                    },
+                    {
+                        text: 'Patrol sudah selesai,tidak akan dilanjutkan lagi',
+                        value: 'Finish',
+                    }
+                    ],
+                    callback: function (result) {
+                        if (result==1){
+                          // document.location.href = "pertanyaan_patrol.html";
+                        }else{
+                            actstoppatrol(result);
+                        }
+                        
+                    }
+                });
+                
+            };
+            function lanjut(){
+              // Simpan Hasil Patrol
+              var hasil = $("input[type='radio'][name='hasil']:checked").val(),remark=$('#keterangan').val();
+              var idpatrol = $('#idpatrol').val(),idpertanyaan =$('#idpertanyaan').val();
+              if (hasil != "Sesuai"){
+                 if (remark == ""){
+                    bootbox.alert('Remark harus diisi, jika hasil tidak sesuai !!');
+                    $('#remark').focus();
+                    xlanjut = 0;
+                 } else{
+                    xlanjut = 1;    
+                 }  
+              }else{
+                xlanjut = 1;
+              }
+              if (xlanjut == 1){
+                $.ajax({
+                        type    : 'POST',
+                        url     : '/simpanhasilpatrol',
+                        dataType: 'json',
+                        data    : {
+                            'idpatrol':idpatrol,'idpertanyaan':idpertanyaan,'remark':remark,'hasil':hasil
+                        },
+                        success : function(response){
+                            if(response.status=='1'){
+                            window.location.href = '/mulaipatrol?idpatrol=' + idpatrol;
+                            //   window.top.location = window.top.location;
+                            }else{
+                                msg_alert_warning(response.msg, '#nmsp');
+                            }
+                        },
+                        error: function(error){
+                            console.log(error);
+                            waitingDialog.hide();
+                            if(error.status == 403){
+                                msg_server_reloading();
+                            }else{
+                                msg_alert_warning('Data gagal diproses !', '#nmsp');
+                            }
+                        }
+                    });
+
+              }
+              
+            }
+        </script>
+    </head>
+    <body class="g-sidenav-show  bg-gray-100">   
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <!-- <nav aria-label="breadcrumb">
+                </nav> -->
+                <!-- <ul class="navbar-nav  justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="/home">
+                            
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10 ">home</i>
+                                <span class="nav-link-text ms-1">Home</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="/logout">
+                            
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">logout</i>
+                                <span class="nav-link-text ms-1">Sign Out</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul> -->
+            </div>
+        </nav>
+
+        <div class ="mask gradient-custom"></div>
+        <div class="container-fluid">
+            <div class="card mb-1 box-shadow">
+              <div class="card-header">
+                  <Center><h4 class="my-0 font-weight-normal">Question Patrol</h4></Center>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="input-group input-group-static my-3">
+                          <label>ID Patrol</label>
+                            <input type="id" id="idpatrol" value="{{idpatrol}}" class="form-control" readonly>
+                            <!-- <input id = "idpatrol" value="{{idpatrol}}" class="form-control" readonly> -->
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="input-group input-group-static my-3">
+                              <label>Petugas</label>
+                              <input type="operator" value="{{operator}}" readonly="readonly" class="form-control">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="input-group input-group-static my-3">
+                          <label>Induk</label>
+                          <input type="induk" value="{{nminduk}}" readonly="readonly" class="form-control">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-header">
+                      <center> <h4 class="my-0 font-weight-normal">Pertanyaan ke {{mulai}} dari {{selesai}}</h4> </center>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="input-group input-group-static my-3">
+                          <label>Point </label>
+                          </div>  
+                          <div class="input-group">
+                              <!-- <label class="form-label">ID Patrol </label> -->
+                              <input type="text" style=" background: blue; color:rgb(255, 255, 255) " value="&nbsp;&nbsp;{{nmpoint}}" class="form-control">
+                          </div>
+                      </div>
+                      <div class="col-md-2">     
+                      </div>
+                      <div class="col-md-4">
+                      <div class="input-group input-group-static my-3">
+                          <label><b>Hasil :</b> </label>
+                          <div class="form-check mb-3">
+                              <input class="form-check-input" type="radio" name="hasil" value = "Sesuai" onclick="document.getElementsByName('keterangan')[0].disabled=false;"> Sesuai</input>
+                              <input class="form-check-input" type="radio" name="hasil" value ="Tidak" onclick="document.getElementsByName('keterangan')[0].disabled=false;"> Tdk Sesuai</input>
+                          </div>
+                  
+                          <!-- <div class="form-check mb-3">
+                              <input class="form-check-input" type="radio" name="hasil" value="sesuai">
+                              <label class="custom-control-label" for="customRadio1">Sesuai</label>
+                          </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="hasil" value="tdksesuai">
+                              <label class="custom-control-label" for="customRadio2">Tidak Sesuai</label>
+                          </div> -->
+                      </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="input-group input-group-static my-3">
+                            <label class="custom-control-label" for="customCheck1"><b>Pertanyaan :</b></label>
+                        </div>
+                        <div class="input-group input-group-static my-3">
+                            <input type="hidden" id="idpertanyaan" value="{{idpertanyaan}}" class="form-control" hidden>
+                            <textarea class="form-control" id="pertanyaan" value="" rows="2" readonly="readonly" >{{pertanyaan1}}</textarea>	
+                        </div>
+                        <div class="input-group input-group-static my-3">
+                            <label class="custom-control-label" for="customCheck1"><b>Standar Jawaban</b></label>
+                        </div>
+                        <div class="input-group input-group-static my-3">
+                            <textarea class="form-control" rows="6" placeholder="Isi Pertanyaan" id="standar" spellcheck="false" readonly="readonly">{{stdjwb1}}</textarea>
+                            <!-- <textarea class="form-control" rows="6" placeholder="" id="standar" spellcheck="false" readonly="readonly">{{stdjwb1}}</textarea> -->
+                        </div>
+                        </div>
+                        <!-- <div class="col-md-2"> </div> -->
+                      <div class="col-md-4">
+                          <div class="input-group input-group-static my-3">
+                              <label><b>Remark :</b> </label>
+                              <textarea  name="keterangan" id="keterangan" rows="11" placeholder="Remark" class="form-control" enable></textarea>	
+                          </div>
+                      </div>
+                      <div class="col-md-6">        
+                      </div>
+                  </div>
+                  <div style="float:right;">
+                      <a href="#" class="btn btn-primary btn-lg active" role="button" onclick="stoppatrol();" aria-pressed="true">Stop</a>
+                      <a href="#" class="btn btn-info btn-lg active" role="button" onclick="lanjut();" aria-pressed="true">Next</a>
+                  </div>
+              </div>                    
+            </div>
+        </div>
+            
+    </body>
+</html>
+
+

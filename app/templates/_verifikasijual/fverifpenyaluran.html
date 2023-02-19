@@ -1,0 +1,796 @@
+<div id="mverifpenyaluran" class="modal modal-dialog-md fade" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md">
+       <div class="modal-content">
+ 
+          <!-- <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" rel="tooltip" title="Tekan Tombol 'ESC' untuk keluar" data-placement="left">
+                &times;
+             </button>
+             <h4 class="modal-title"><i class="fa fa-edit"></i> Data Pemasok</h4>
+          </div> -->
+ 
+          <div class="modal-body">
+             <div class="row">
+                <div class="col-md-12 col-xs-12">
+ 
+                   <div class="jarviswidget jarviswidget-color-green no-mg" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-collapsed="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+ 
+                      <header>
+                         <span class="widget-icon"> <i class="fa fa-th-list txt-color-white"></i> </span>
+                         {% if com == 'create' %}
+                            <h2> Input Data Pemasok</h2>
+                         {% else %}
+                            <h2> FORM PEMERIKSAAN PENYALURAN BARANG</h2>
+                         {% endif %}
+                      </header>
+ 
+                      <div>
+                         <div class="widget-body">
+                            <div class="row no-mg">
+                               {% if com == 'create' %}
+                               <div>
+                                  <div class="form-group col-md-12 col-xs-12 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Nama Obat <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="nmobat" class="form-control input-sm text-center">
+                                     <script>enKey('#nmsp', '#almt')</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-12 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Alamat <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="almt" class="form-control input-sm text-center" disabled>
+                                     <script>enKey('#almt','#almt2');</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-12 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Alamat Kirim<i class="fa fa-circle"></i></label>
+                                     <input type="text" id="almt2" class="form-control input-sm text-center" disabled>
+                                     <script>enKey('#almt2','#kontak');</script>
+                                  </div>
+                                  
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Kontak Person <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="kontak" class="form-control input-sm text-center" disabled>
+                                     <script>enKey('#kontak','#telp');</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-3 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Telp. <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="telp" class="form-control input-sm text-center" disabled>
+                                     <script>enKey('#telp','#email');</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-5 col-xs-6 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Email</label>
+                                     <input type="text" id="email" class="form-control input-sm text-center" disabled>
+                                     <script>enKey('#email', '#tempo', true);</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-2 col-xs-6 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Tempo [Hari] <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="tempo" class="form-control input-sm text-center" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" disabled>
+                                        <script>enKey('#tempo', '#norek')</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-4 col-xs-6 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">No Rekening</label>
+                                     <input type="text" id="norek" class="form-control input-sm text-center" disabled>
+                                     <script>enKey('#norek', '#nmbank', true);</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Nama Bank</label>
+                                     <input type="text" id="nmbank" class="form-control input-sm text-center" disabled>
+                                     <script>enKey('#nmbank', '#simpan', true);</script>
+                                  </div>
+                               </div>
+                               {% else %}
+                               <div>
+                                  <div class="form-group col-md-2 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Kode <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="kdobat" class="form-control input-sm text-center" value="{{kdobat}}" disabled>
+                                  </div>
+                                  <div class="form-group col-md-7 col-xs-7 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Nama Barang <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="nmsp" class="form-control input-sm text-center" value="{{nmobat}}" disabled>
+                                     <script>enKey('#nmsp', '#almt')</script>
+                                  </div>
+                                  <div class="form-group col-md-3 col-xs-3 pd-right-2 pd-left-2">
+                                    <label class="menu-item-parent">Satuan <i class="fa fa-circle"></i></label>
+                                    <input type="text" id="satuan" class="form-control input-sm text-center" value="{{satuan}}" disabled>
+                                    <script>enKey('#nmsp', '#almt')</script>
+                                 </div>
+
+                                  <div class="form-group col-md-6 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">No.Surat Pesanan <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="nosp" class="form-control input-sm text-center" value="{{nosp}}" disabled>
+                                     <input type="hidden" id="batch" class="form-control input-sm text-center" value="{{batch}}" disabled>
+                                  </div>
+
+                                  
+                                  <div class="form-group col-md-6 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">No. Faktur <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="nofaktur" class="form-control input-sm text-center" value="{{nofaktur}}" placeholder="Nomor Faktur" readonly>
+                                     <script>enKey('#nofaktur','#sopir');</script>
+                                  </div>
+ 
+                                  <!-- <div class="form-group col-md-8 col-xs-4 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Sopir <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="sopir" class="form-control input-sm text-center" value="{{sopir}}" placeholder="Nama Sopir">
+                                     <script>enKey('#sopir','#nopol');</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-4 col-xs-4 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">No. Kendaraan</label>
+                                     <input type="text" id="nopol" class="form-control input-sm text-center" value="{{nopol}}" >
+                                     <script>enKey('#nopol', '#xselapot', true);</script>
+                                  </div>
+  -->
+                                  <!-- <div class="form-group col-md-2 col-xs-6 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Tempo [Hari] <i class="fa fa-circle"></i></label>
+                                     <input type="text" id="tempo" class="form-control input-sm text-center" value="{{tempo}}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                     <script>enKey('#tempo', '#norek')</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-4 col-xs-6 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">No Rekening</label>
+                                     <input type="text" id="norek" class="form-control input-sm text-center" value="{{norek}}">
+                                     <script>enKey('#norek', '#nmbank', true);</script>
+                                  </div>
+ 
+                                  <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent">Nama Bank</label>
+                                     <input type="text" id="nmbank" class="form-control input-sm text-center" value="{{nmbank}}">
+                                     <script>enKey('#nmbank', '#simpan', true);</script>
+                                  </div> -->
+ 
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent text-center label-info"><b>Nama Obat</b></label>
+                                     {% if optobat == 'V' %}
+                                          <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                             <label>
+                                                   <input type="Radio" name='optobat' id='optobat' value="Sesuai" checked >Sesuai
+                                             </label>
+                                          </div>
+                                          <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                             <label>
+                                                <input type="radio"  name='optobat' id="optobat" value="Tidak" onclick="checkobat(this.value)"> Tidak
+                                             </label>
+                                          </div>
+                                       {% else %}
+                                          <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                             <label>
+                                                   <input type="Radio"  name='optobat' id="optobat" value="Sesuai"  >Sesuai
+                                             </label>
+                                          </div>
+                                          <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                             <label>
+                                                <input type="radio"  name='optobat' id="optobat" value="Tidak" onclick="checkobat(this.value)" checked > Tidak
+                                             </label>
+                                          </div>
+                                       {% endif %}
+                                    </div>
+                                    <input type="hidden" id="alasanobat" name="alasanobat" >
+                                    <script>
+                                       function checkobat(val){
+                                          if (val=="Tidak"){
+                                             bootbox.prompt({
+                                                title: "Keterangan Nama Obat Tidak sesuai",
+                                                inputType: 'textarea',
+                                                callback: function (result) {
+                                                   $('#alasanobat').val(result);
+                                                }
+                                             });
+                                          }
+                                       }
+                                    </script>
+
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent label-info text-center "><b>Kekuatan Sediaan</b></label>
+                                     {% if optsediaan == 'V' %}
+ 
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                                 <input name="optkekuatan" type="radio" id="optkekuatan" value="Setuju" checked > Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" name="optkekuatan" id="optkekuatan" Value="Tidak" onclick="checkkekuatan(this.value)" > Tidak
+                                        </label>
+                                        </div>
+                                     {% else %} 
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                                 <input name="optkekuatan" type="radio" id="optkekuatan" value="Setuju" > Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" name="optkekuatan" id="optkekuatan" Value="Tidak" onclick="checkkekuatan(this.value)" checked > Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% endif %}
+                                     <input type="hidden" id="alasankekuatan" name="alasankekuatan" >
+                                     <script>
+                                        function checkkekuatan(val){
+                                           if (val=="Tidak"){
+                                              bootbox.prompt({
+                                                 title: "Keterangan Kekuatan Tidak sesuai",
+                                                 inputType: 'textarea',
+                                                 callback: function (result) {
+                                                    $('#alasankekuatan').val(result);
+                                                 }
+                                              });
+                                           }
+                                        }
+                                     </script>
+
+                                  </div>
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent label-info text-center "><b>Bentuk Sediaan</b></label>
+                                     {% if optbentuk == 'V' %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optbentuk" name="optbentuk" Value = "Ada" checked> Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optbentuk" name="optbentuk" Value="Tidak" onclick="checksediaan(this.value)" > Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% else %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optbentuk" name="optbentuk" Value = "Ada" > Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optbentuk" name="optbentuk" Value="Tidak"  onclick="checksediaan(this.value)" checked > Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% endif %}
+                                     <input type="hidden" id="alasanbentuk" name="alasanbentuk" >
+                                     <script>
+                                        function checksediaan(val){
+                                           if (val=="Tidak"){
+                                              bootbox.prompt({
+                                                 title: "Keterangan Sediaan Tidak sesuai",
+                                                 inputType: 'textarea',
+                                                 callback: function (result) {
+                                                    $('#alasanbetuk').val(result);
+                                                 }
+                                              });
+                                           }
+                                        }
+                                     </script>
+  
+
+                                  </div>
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent label-info text-center "><b>Manufacture / Produsen</b></label>
+                                     {% if optpabrik == 'V' %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optpabrik" name = "optpabrik" value="Ada" checked> Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optpabrik" name = "optpabrik" value="Tidak"onclick="checkpabrik(this.value)" > Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% else %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optpabrik" name = "optpabrik" value="Ada" > Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optpabrik" name = "optpabrik" value="Tidak" onclick="checkpabrik(this.value)" checked > Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% endif %}
+                                     <input type="hidden" id="alasanpabrik" name="alasanpabrik" >
+                                     <script>
+                                        function checkpabrik(val){
+                                           if (val=="Tidak"){
+                                              bootbox.prompt({
+                                                 title: "Keterangan Pabrik Tidak sesuai",
+                                                 inputType: 'textarea',
+                                                 callback: function (result) {
+                                                    $('#alasanpabrik').val(result);
+                                                 }
+                                              });
+                                           }
+                                        }
+                                     </script>
+
+                                  
+                                    </div>
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent label-info text-center "><b>Nomor Ijin Edar</b></label>
+                                     {% if optnie == 'V' %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optnie" name = "optnie"  Value="Ada" checked> Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optnie" name = "optnie" value="Tidak" onclick="checknie(this.value)"> Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% else %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optnie" name = "optnie"  Value="Ada"> Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optnie" name = "optnie" value="Tidak" onclick="checknie(this.value)" checked > Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% endif %}
+                                     <input type="hidden" id="alasannie" name="alasannie" >
+                                     <script>
+                                        function checknie(val){
+                                           if (val=="Tidak"){
+                                              bootbox.prompt({
+                                                 title: "Keterangan NIE Tidak sesuai",
+                                                 inputType: 'textarea',
+                                                 callback: function (result) {
+                                                    $('#alasannie').val(result);
+                                                 }
+                                              });
+                                           }
+                                        }
+                                     </script>
+   
+                                  </div>
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                     <label class="menu-item-parent label-info text-center "><b>Nomor Batch</b></label>
+                                     {% if optbatch == 'V' %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optbatch" name="optbatch"  Value="Terima" checked> Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optbatch" name="optbatch" value="Tolak" onclick="checkbatch(this.value)"> Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% else %}
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                           <label>
+                                              <input type="radio" id="optbatch" name="optbatch"  Value="Terima"> Sesuai
+                                           </label>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                        <label>
+                                           <input type="radio" id="optbatch" name="optbatch" value="Tolak" onclick="checkbatch(this.value)" checked> Tidak
+                                        </label>
+                                        </div>
+ 
+                                     {% endif %}
+                                  </div>
+                                  <input type="hidden" id="alasanbatch" name="alasanbatch" >
+                                  <script>
+                                     function checkbatch(val){
+                                        if (val=="Tolak"){
+                                           bootbox.prompt({
+                                              title: "Keterangan Batch Tidak sesuai",
+                                              inputType: 'textarea',
+                                              callback: function (result) {
+                                                 $('#alasanbatch').val(result);
+                                              }
+                                           });
+                                        }
+                                     }
+                                  </script>
+
+
+                                  <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                    <label class="menu-item-parent label-info text-center "><b>Tgl Kedaluwarsa</b></label>
+                                    {% if optexp == 'V' %}
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                          <label>
+                                             <input type="radio" id="optexp" name="optexp"  Value="Terima" checked> Sesuai
+                                          </label>
+                                       </div>
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                       <label>
+                                          <input type="radio" id="optexp" name="optexp" value="Tolak" onclick="checkexp(this.value)"> Tidak
+                                       </label>
+                                       </div>
+
+                                    {% else %}
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                          <label>
+                                             <input type="radio" id="optexp" name="optexp"  Value="Terima"> Sesuai
+                                          </label>
+                                       </div>
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                       <label>
+                                          <input type="radio" id="optexp" name="optexp" value="Tolak" onclick="checkexp(this.value)" checked> Tidak
+                                       </label>
+                                       </div>
+
+                                    {% endif %}
+                                 </div>
+                                 <input type="hidden" id="alasanexp" name="alasanexp" >
+                                 <script>
+                                    function checkexp(val){
+                                       if (val=="Tolak"){
+                                          bootbox.prompt({
+                                             title: "Keterangan Tanggal Expired Tidak sesuai",
+                                             inputType: 'textarea',
+                                             callback: function (result) {
+                                                $('#alasanexp').val(result);
+                                             }
+                                          });
+                                       }
+                                    }
+                                 </script>
+
+
+                                 <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                    <label class="menu-item-parent label-info text-center "><b>Jumlah Obat</b></label>
+                                    {% if optjumlah == 'V' %}
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                          <label>
+                                             <input type="radio" id="optjumlah" name="optjumlah"  Value="Terima" checked> Sesuai
+                                          </label>
+                                       </div>
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                       <label>
+                                          <input type="radio" id="optjumlah" name="optjumlah" value="Tolak" onclick="checkjml(this.value)"> Tidak
+                                       </label>
+                                       </div>
+
+                                    {% else %}
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                          <label>
+                                             <input type="radio" id="optjumlah" name="optjumlah"  Value="Terima"> Sesuai
+                                          </label>
+                                       </div>
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                       <label>
+                                          <input type="radio" id="optjumlah" name="optjumlah" value="Tolak" onclick="checkjml(this.value)" checked> Tidak
+                                       </label>
+                                       </div>
+
+                                    {% endif %}
+                                 </div>
+                                 <input type="hidden" id="alasanjumlah" name="alasanjumlah" >
+                                 <script>
+                                    function checkjml(val){
+                                       if (val=="Tolak"){
+                                          bootbox.prompt({
+                                             title: "Keterangan Jumlah Tidak sesuai",
+                                             inputType: 'textarea',
+                                             callback: function (result) {
+                                                $('#alasanjumlah').val(result);
+                                             }
+                                          });
+                                       }
+                                    }
+                                 </script>
+
+                                 <div class="form-group col-md-4 col-xs-2 pd-right-2 pd-left-2">
+                                    <label class="menu-item-parent label-info text-center "><b>Kondisi Fisik</b></label>
+                                    {% if optfisik == 'V' %}
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                          <label>
+                                             <input type="radio" id="optfisik" name="optfisik"  Value="Terima" checked> Sesuai
+                                          </label>
+                                       </div>
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                       <label>
+                                          <input type="radio" id="optfisik" name="optfisik" value="Tolak" onclick="checkfisik(this.value)" > Tidak
+                                       </label>
+                                       </div>
+
+                                    {% else %}
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                          <label>
+                                             <input type="radio" id="optfisik" name="optfisik"  Value="Terima"> Sesuai
+                                          </label>
+                                       </div>
+                                       <div class="form-group col-md-6 col-xs-6 pd-right-2 pd-left-2">
+                                       <label>
+                                          <input type="radio" id="optfisik" name="optfisik" value="Tolak" onclick="checkfisik(this.value)" checked> Tidak
+                                       </label>
+                                       </div>
+
+                                    {% endif %}
+                                 </div>
+                                 <input type="hidden" id="alasanfisik" name="alasanfisik" >
+                                 <script>
+                                    function checkfisik(val){
+                                       if (val=="Tolak"){
+                                          bootbox.prompt({
+                                             title: "Keterangan Jumlah Tidak sesuai",
+                                             inputType: 'textarea',
+                                             callback: function (result) {
+                                                $('#alasanfisik').val(result);
+                                             }
+                                          });
+                                       }
+                                    }
+                                 </script>
+
+
+                                 <div class="form-group col-md-6 col-xs-2 pd-right-2 pd-left-2">
+                                    <label class="menu-item-parent text-center label-danger"><b>Checker</b></label>
+                                    <input type="text" id="checker" class="form-control input-sm text-center" value="{{checker}}">
+                                    <script>enKey('#checker', '#picker', true);</script>
+                                 </div>
+                                 <div class="form-group col-md-6 col-xs-2 pd-right-2 pd-left-2">
+                                    <label class="menu-item-parent text-center label-danger"><b>Picker</b></label>
+                                    <input type="text" id="picker" class="form-control input-sm text-center" value="{{picker}}">
+                                    <script>enKey('#picker', '#simpan', true);</script>
+                                 </div>
+
+                                 <!-- <div class="col-md-4 col-xs-4 pd-left-2 pd-right-2" >
+                                    <div class="demo-btns pull-right">
+                                       {% if com == 'create' %}
+                                          <button id='simpan' class="btn btn-primary btn-sm res-btn" value="Simpan" onclick="act_penyaluran(this.value)" disabled>
+                                             <i class="fa fa-save"></i><span> Simpan</span>
+                                          </button>
+                                       {% else %}
+                                          <button id='simpan' class="btn btn-primary btn-sm res-btn" value="Rubah" onclick="act_penyaluran(this.value)">
+                                             <i class="fa fa-save"></i><span> Approved</span>
+                                          </button>
+                                       {% endif %}
+                                       <button class="btn btn-danger btn-sm res-btn" value="Batal" onclick="act_penyaluran(this.value)">
+                                          <i class="fa fa-sign-out"></i><span> Batal</span>
+                                       </button>
+                                    </div>
+                                 </div> -->
+                
+                               </div>
+                               {% endif %}
+                            </div>
+                         </div>
+                      </div>
+ 
+                   </div>
+ 
+                </div>
+ 
+             </div>
+          </div>
+ 
+          <div class="modal-footer">
+             <div class="col-md-12 col-xs-12 pd-left-2 pd-right-2" >
+                <div class="demo-btns pull-right">
+                   {% if com == 'create' %}
+                      <button id='simpan' class="btn btn-primary btn-sm res-btn" value="Simpan" onclick="act_penyaluran(this.value)" disabled>
+                         <i class="fa fa-save"></i><span> Simpan</span>
+                      </button>
+                   {% else %}
+                      <button id='simpan' class="btn btn-primary btn-sm res-btn" value="Rubah" onclick="act_penyaluran(this.value)">
+                         <i class="fa fa-save"></i><span> Approved</span>
+                      </button>
+                   {% endif %}
+                   <button class="btn btn-danger btn-sm res-btn" value="Batal" onclick="act_penyaluran(this.value)">
+                      <i class="fa fa-sign-out"></i><span> Batal</span>
+                   </button>
+                </div>
+             </div>
+          </div>
+ 
+       </div>
+    </div>
+ </div>
+ <script>
+    var com = "{{com}}";
+ 
+    $('#mverifpenyaluran').on('show.bs.modal', function() {
+       $(this).show();
+       setModalMaxHeight(this);
+    });
+     $('#mverifpenyaluran').on('hidden.bs.modal', function(){
+      
+    });
+ 
+    $(window).resize(function() {
+       if ($('#mverifpenyaluran.in').length != 0) {
+          setModalMaxHeight($('#mverifpenyaluran.in'));
+       }
+    });
+ 
+    $(function(){
+       $('#mverifpenyaluran').modal();
+    });
+ 
+    $(document).ready(function(){
+       pageSetUp();
+       $('#mverifpenyaluran').on('shown.bs.modal', function () {
+          $('#nofaktur').focus();
+       });
+ 
+    });
+ 
+    function act_penyaluran(val){
+       var nosp = $('#nosp').val(),kdobat = $('#kdobat').val();
+       var nofaktur = $('#nofaktur').val(), batch = $('#batch').val();
+       var xchecker = $('#checker').val(),picker = $('#picker').val();
+       var alasanobat=$('#alasanobat').val(),alasankekuatan=$('#alasankekuatan').val(),alasanbentuk=$('#alasanbentuk').val(),
+           alasanpabrik=$('#alasanpabrik').val(),alasannie=$('#alasannie').val(),alasanbatch=$('#alasanbatch').val(),
+           alasanexp=$('#alasanexp').val(),alasanjumlah=$('#alasanjumlah').val(),alasanfisik=$('#alasanfisik').val();
+
+       if ($("#optobat").is(":checked") == true){
+            optobat = "V";
+       }else{
+            optobat = "X";
+       }
+       if ($("#optkekuatan").is(":checked") == true){
+         optkekuatan = "V";
+       }else{
+         optkekuatan = "X";
+       }
+       if ($("#optbentuk").is(":checked") == true){
+            optbentuk = "V";
+       }else{
+            optbentuk = "X";
+       }
+       if ($("#optpabrik").is(":checked") == true){
+            optpabrik = "V";
+       }else{
+            optpabrik = "X";
+       }
+       if ($("#optnie").is(":checked") == true){
+            optnie = "V";
+       }else{
+            optnie = "X";
+       }
+       if ($("#optbatch").is(":checked") == true){
+            optbatch = "V";
+       }else{
+            optbatch = "X";
+       }
+       if ($("#optexp").is(":checked") == true){
+            optexp = "V";
+       }else{
+            optexp = "X";
+       }
+       if ($("#optjumlah").is(":checked") == true){
+            optjumlah = "V";
+       }else{
+            optjumlah = "X";
+       }
+       if ($("#optfisik").is(":checked") == true){
+            optfisik = "V";
+       }else{
+            optfisik = "X";
+       }
+       if(val=='Simpan'){
+          if(nmsp == ''){ msg_alert_warning(null, '#nmsp');
+          }else if(almt == ''){ msg_alert_warning(null, '#almt');
+          }else if(almt2 == ''){ msg_alert_warning(null, '#almt2');
+          }else if(kontak == ''){ msg_alert_warning(null, '#kontak');
+          }else if(telp == ''){ msg_alert_warning(null, '#telp');
+          }else if(tempo == ''){ msg_alert_warning(null, '#tempo');
+          }else{
+                var box = bootbox.confirm({
+                   title: 'Konfirmasi',
+                   message: 'Lanjutkan Proses ?',
+                   buttons: {
+                      confirm: { label: 'Ya', className: 'btn-primary' },
+                      cancel: { label: 'Tidak', className: 'btn-danger' }
+                   },
+                   callback: function(result){
+                      if(result){
+                         $.ajax({
+                            type    : 'POST',
+                            url     : '/simpanpemasok',
+                            dataType: 'json',
+                            data    : {
+                               'nmsp' : nmsp, 'almt': almt,
+                               'almt2': almt2, 'kontak':kontak,
+                               'telp':telp, 'email':email,
+                               'tempo' :tempo, 'norek':norek,
+                               'nmbank':nmbank
+                            },
+                            success : function(response){
+                               waitingDialog.hide();
+                               if(response.status=='1'){
+                                     var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                     var box = bootbox.alert(msg);
+                                     box.on('hidden.bs.modal', function(){
+                                        show_data_pemasok();
+                                        $('#mverifpenyaluran').modal('hide');
+                                     });
+                               }else{
+                                     msg_alert_warning(response.msg, '#nmsp');
+                               }
+                            },
+                            error   : function(error){
+                               console.log(error);
+                               waitingDialog.hide();
+                               if(error.status == 403){
+                                  msg_server_reloading();
+                               }else{
+                                  msg_alert_warning('Data gagal diproses !', '#nmsp');
+                               }
+                            }
+                         });
+                      }
+                   }
+                });
+          }
+ 
+       }else if(val == 'Rubah'){
+          
+          if(nosp == ''){ msg_alert_warning("Test", '#nosp');
+          }else if(nofaktur == ''){ msg_alert_warning("Nomor Faktur Harus diisi", '#nofaktur');
+          }else if(checker == ''){ msg_alert_warning("Nama Petugas Checker Harus diisi", '#checker');
+          }else{
+             var box = bootbox.confirm({
+                title: 'Konfirmasi',
+                message: 'Lanjutkan Proses ?',
+                buttons: {
+                   confirm: { label: 'Ya', className: 'btn-primary' },
+                   cancel: { label: 'Tidak', className: 'btn-danger' }
+                },
+                callback: function(result){
+                   if(result){
+                      $.ajax({
+                         type    : 'POST',
+                         url     : '/verifpenyaluran',
+                         dataType: 'json',
+                         data    : {
+                            'nosp': nosp, 'nofaktur' : nofaktur,'kdobat':kdobat,
+                            'xchecker':xchecker, 'picker':picker,'batch':batch,
+                            'optobat':optobat,'optsediaan':optkekuatan,'optbentuk':optbentuk,'optpabrik':optpabrik,'optnie':optnie,
+                            'optbatch':optbatch,'optexp':optexp,'optjumlah':optjumlah,'optfisik':optfisik,
+                            'alasanobat':alasanobat,'alasankekuatan':alasankekuatan,'alasanbentuk':alasanbentuk,'alasanpabrik':alasanpabrik,
+                            'alasannie':alasannie,'alasanbatch':alasanbatch,'alasanexp':alasanexp,'alasanjumlah':alasanjumlah,'alasanfisik':alasanfisik
+
+                         },
+                         success : function(response){
+                            waitingDialog.hide();
+                            if(response.status=='1'){
+                               var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                               var box = bootbox.alert(msg);
+                               box.on('hidden.bs.modal', function(){
+
+                                 $('#tbldetilverifjual').DataTable().ajax.reload();
+                                 $('#mverifpenyaluran').modal('hide');
+                               });
+                            }else{
+                               msg_alert_warning(response.msg, '#nmsp');
+                            }
+                         },
+                         error   : function(error){
+                            console.log(error);
+                            waitingDialog.hide();
+                            if(error.status == 403){ msg_server_reloading();
+                            }else{ msg_alert_warning('Data gagal diproses !', '#nmsp'); }
+                         }
+                      });
+                   }
+                }
+             });
+          }
+ 
+       }else if(val=='Batal'){
+          $('#mverifpenyaluran').modal('hide');
+       }
+    };
+ </script>
+ 

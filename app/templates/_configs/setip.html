@@ -1,0 +1,158 @@
+<div id="widget-grid" class="">
+    <div class="row no-mg">
+        <div class="col-md-4 col-md-offset-4 col-xs-12 no-pd mg-bottom-5">
+
+            <div class="jarviswidget jarviswidget-color-blueDark no-mg" id="wid-id-0" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-collapsed="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false">
+
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-th-list txt-color-white"></i> </span>
+                    <h2> Setup Bank Data</h2>
+                </header>
+                
+                <div>
+                    <div class="widget-body no-pd">
+                        <div class="row no-mg">
+
+                            <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                <label class="menu-item-parent">Host</label>
+                                <div class="inner-addon left-addon">
+                                    <i class="glyphicon glyphicon-globe"></i>
+                                    <input type="text" id="dbhost" class="form-control input-sm text-center">
+                                </div>
+                                <script>enKey('#dbhost', '#dbname');</script>
+                            </div>
+                            <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                <label class="menu-item-parent">DB Name</label>
+                                <input type="text" id="dbname" class="form-control input-sm text-center">
+                                <script>enKey('#dbname', '#simpan');</script>
+                            </div>
+<!-- Setting Untuk Bridging BPJS -->
+                            <h5> Setup BPJS</h5>
+                            <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                <label class="menu-item-parent">Cons Id</label>
+                                <div class="inner-addon left-addon">
+                                    <i class="glyphicon glyphicon-globe"></i>
+                                    <input type="text" id="xconsID" class="form-control input-sm text-center">
+                                </div>
+                                <script>enKey('#dbhost', '#dbname');</script>
+                            </div>
+                            <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                <label class="menu-item-parent">Screet Key</label>
+                                <input type="text" id="dbname" class="form-control input-sm text-center">
+                                <script>enKey('#dbname', '#simpan');</script>
+                            </div>
+<!-- Setting Untuk Bridging Kreasi -->
+                            <h5> Setup Bridging ke RS Rujukan & Gudang PBF</h5>
+                            <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                <label class="menu-item-parent">User Name</label>
+                                <div class="inner-addon left-addon">
+                                    <i class="glyphicon glyphicon-globe"></i>
+                                    <input type="text" id="xconsID" class="form-control input-sm text-center">
+                                </div>
+                                <script>enKey('#dbhost', '#dbname');</script>
+                            </div>
+                            <div class="form-group col-md-6 col-xs-12 pd-left-2 pd-right-2">
+                                <label class="menu-item-parent">Password</label>
+                                <input type="text" id="dbname" class="form-control input-sm text-center">
+                                <script>enKey('#dbname', '#simpan');</script>
+                            </div>
+
+
+                            <div class="form-group col-md-12 col-xs-12 pd-left-2 pd-right-2">
+                                <!-- <label class="menu-item-parent">&nbsp;</label> -->
+                                <div class="note">
+                                    <strong>Peringatan : </strong><em style="color: red;">Kesalahan dalam pengisian data akan berakibat koneksi ke Bank Data tidak terhubung.</em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-footer">
+                        <div class="col-md-12 col-xs-12 no-pd pd-left-5 pd-right-5 pd-bottom-5">
+                            <div class="demo-btns">
+                                <button type="button" id="simpan" class="btn btn-primary btn-sm res-btn" value="Simpan" onclick="tombol(this.value)">
+                                    <i class="fa fa-spinner"></i>
+                                    <span> Proses</span>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm res-btn" value="Tutup" onclick="tombol(this.value)">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span> Tutup</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id='showip'></div>
+<script>
+    $(document).ready(function(){
+        getbankdata();
+        $('#dbhost').focus();
+    });
+
+    function tombol(val){
+        var dbhost = $('#dbhost').val(), dbname = $('#dbname').val();
+        if(val=='Simpan'){
+            if(dbhost == ''){ msg_alert_warning(null, '#dbhost');
+            }else if(dbname == ''){ msg_alert_warning(null, '#dbname');
+            }else{
+                var box = bootbox.confirm({
+                    title: 'Konfirmasi',
+                    message: 'Lanjutkan Proses ?',
+                    buttons: {
+                        confirm: { label: 'Ya', className: 'btn-primary' },
+                        cancel: { label: 'Tidak', className: 'btn-danger' }
+                    },
+                    callback: function(result){
+                        if(result){
+                            waitingDialog.show('Proses...', {dialogSize:'sm'});
+                            $.ajax({
+                                type    : 'POST',
+                                url     : '/simpanbankdata',
+                                dataType: 'json',
+                                data    : { 'dbhost': dbhost, 'dbname':dbname },
+                                success: function(response){
+                                    waitingDialog.hide();
+                                    if(response.status=='1'){
+                                        var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;Data berhasil diperbaharui.</h6>";
+                                        var box = bootbox.alert(msg);
+                                        box.on('hidden.bs.modal', function(){
+                                            // goto_menu();
+                                            location.href = "/logout";
+                                        });
+                                    }else{
+                                        msg_alert_warning('Data gagal diperbaharui !', '#dbhost');
+                                    }
+                                },
+                                error: function(error){
+                                    console.log(error);
+                                    waitingDialog.hide();
+                                    msg_alert_warning('Data gagal diperbaharui !', '#dbhost');
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+
+        }else if(val=='Tutup'){
+            goto_menu();
+        }
+    };
+
+    function getbankdata(){
+        $.post("/getbankdata", function(response){
+            if (response.status == "1"){
+                $('#dbhost').val(response.dbhost);
+                $('#dbname').val(response.dbname);
+                $('#dbhost').focus();
+            }else{
+                $('#dbhost').val('');
+                $('#dbname').val('');
+                $('#dbhost').focus();
+            }
+        });
+    };
+</script>

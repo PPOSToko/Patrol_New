@@ -1,0 +1,66 @@
+<div id="widget-grid" class="">
+    <div class="row no-mg">
+       <div class="col-md-12 col-xs-12 no-pd">
+          <div class="jarviswidget jarviswidget-color-blueDark no-mg" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+             <header>
+                <span class="widget-icon"> <i class="fa fa-th-list txt-color-white"></i> </span>
+                <h2>Daftar Penerimaan Barang Gudang </h2>
+                <div class="widget-toolbar">
+                   <div class="demo-btns pull-right">
+                      <!-- <button type="button" class="btn btn-success btn-xs res-btn" value="Tambah" onclick="tombol(this.value)">
+                         <i class="fa fa-plus"></i>
+                         <span> Tambah</span>
+                      </button> -->
+                      <button type="button" class="btn btn-primary btn-xs res-btn" value="Reload" onclick="tombol(this.value)">
+                         <i class="fa fa-undo"></i>
+                         <span> Reload</span>
+                      </button>
+                      <button type="button" class="btn btn-danger btn-xs res-btn" value="Tutup" onclick="tombol(this.value)" >
+                         <i class="fa fa-sign-out"></i>
+                         <span> Tutup</span>
+                      </button>
+                   </div>
+                </div>
+             </header>
+             <!-- <div id='loadform'></div> -->
+            
+             <div>
+                <div><input type="hidden" id="nosp" class="form-control input-sm text-center" value={{keydata}} hidden></div>
+
+                <div class="widget-body no-padding">
+                   <div class="row no-mg">
+                      <div id='showverifterimadetil'></div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+
+   </div>
+ <div id='loadform'></div>
+ <div id="showcarisatuan"></div>
+ <script>
+    $(document).ready(function(){
+       pageSetUp();
+       show_detil_verifterima();
+    });
+ 
+    function tombol(val){
+        
+       if(val=='Tambah'){
+          load_page('/openform', {'link':'/_verifpenerimaan/fverifpenerimaan.html', 'com':'create'}, '#content');
+       }else if(val=='Reload'){
+         //  load_page('/loadpage', {'link':'/_verifpenerimaan/tverifterimaobat.html'}, '#content');
+         show_detil_verifterima();
+       }else if(val=='Tutup'){
+         load_page('/loadpage', {'link':'/_verifpenerimaan/tverifpenerimaan.html'}, '#content');
+       }
+    };
+ 
+    function show_detil_verifterima(){
+      var nosp = $('#nosp').val();
+
+       load_page('/loadpaged', {'link':'/_verifpenerimaan/listdetilpenerimaan.html','nosp':nosp}, '#showverifterimadetil');
+    };
+ </script>

@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Error Connection</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/ico.png') }}" type="image">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon/ico.png') }}" type="image">
+    <style>
+        .bconn{
+            position : absolute;
+            top : 50%;
+            left : 50%;
+            transform : translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div id='bconn'>
+            <img src='static/img/error.png' width='80' height='80' /><br>
+            <span style='width:275px; text-align:center; display:block; background:rgb(250, 245, 245); border:1px solid #ccc; padding:5px; margin: 5px; font-size:12px; font-weight:bold; color:#FF0000;'>
+            TERJADI KESALAHAN KONEKSI<br>KE BANK DATA !
+            </span>
+            <br>
+            <button onclick='location.href = "/"' style='width:120px; cursor:pointer;'>Reload Page</button>
+        </div>
+    </center>
+</body>
+</html>

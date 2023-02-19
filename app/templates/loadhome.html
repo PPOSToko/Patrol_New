@@ -1,0 +1,65 @@
+<style>
+img {
+   width:100%;
+}
+#address{
+   width: 100%;
+   position:absolute;
+   bottom: 0;
+   background: rgba(0, 0, 0, 0.5);
+   padding: 5px 5px 5px 10px;
+}
+.mg-left-20{
+   margin-left: 20px;
+}
+.mg-right-20{
+    margin-right: 20px;
+}
+.hd-title{
+   font-size: 14px;
+   color: rgb(255, 251, 5);
+   font-weight: bold;
+}
+</style>
+<div class="col-md-12 col-xs-12 no-pd">
+   <div class="col-md-12 col-xs-12 no-pd" center>
+      <!-- <img id="image" src="/static/img/home_screen.jpg"> -->
+      <img id="image" src="/static/img/bg.jpg" >
+   </div>
+   <div class="col-md-12 col-xs-12 no-pd">
+      <div id="address">
+         <span class="hd-title">{{nminstansi}}</span><br>
+         <span style="color: white;">{{almt}}. {{kdpos}}, {{kota}}</span><br>
+         <span style="color: white;">{{tlp}}, {{email}}</span>
+      </div>
+   </div>
+</div>
+<script>
+   $(window).resize(function(){
+      if($(window).width() < 768){
+         var h = window.innerHeight - ($('#header').height()+$('#pagefooter').height())-41;
+         $('#imgbg').css({'height':+h+'px'});
+         $('#image').attr('height', h+'px');
+         $('#address').width($('#imgbg').width() - 15);
+      }else{
+         var h = window.innerHeight - ($('#header').height()+$('#pagefooter').height()+$('#left-panel').height())-41;
+         $('#imgbg').css({'height':+h+'px'});
+         $('#image').attr('height', h+'px');
+         $('#address').width($('#imgbg').width() - 15);
+      }
+   });
+
+   $(document).ready(function(){
+      if($(window).width() < 768){
+         var h = window.innerHeight - ($('#header').height()+$('#pagefooter').height())-41;
+         $('#imgbg').css({'height':+h+'px'});
+         $('#image').attr('height', h+'px');
+         $('#address').width($('#imgbg').width() - 15);
+      }else{
+         var h = window.innerHeight - ($('#header').height()+$('#pagefooter').height()+$('#left-panel').height())-41;
+         $('#imgbg').css({'height':+h+'px'});
+         $('#image').attr('height', h+'px');
+         $('#address').width($('#imgbg').width() - 15);
+      }
+   });
+</script>

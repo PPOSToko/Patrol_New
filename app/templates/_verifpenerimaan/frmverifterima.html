@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<!-- Created by pdf2htmlEX (https://github.com/coolwanglu/pdf2htmlex) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='css/verifterima/base.min.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='css/verifterima/fancy.min.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='css/verifterima/main.css') }}">
+    <script src="{{ url_for('static', filename='js/verifterima/compatibility.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/verifterima/theViewer.min.js') }}"></script>
+    <script>
+        try{
+        theViewer.defaultViewer = new theViewer.Viewer({});
+        }catch(e){}
+    </script>
+    <title></title>
+</head>
+<body>
+    <div id="sidebar">
+    <div id="outline">
+    </div>
+    </div>
+    <div id="page-container">
+        <div id="pf1" class="pf w0 h0" data-page-no="1">
+            <div class="pc pc1 w0 h0"><img class="bi x0 y0 w1 h1" alt="" src="{{ url_for('static', filename='img/verifterima/bg1.png') }}"/>
+                <div class="c x1 y1 w2 h2">
+                    <div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">PT. KREASI USAHA CIPTA UTAMA</div>
+                </div>
+                <div class="c x1 y3 w3 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Jl. Raya Ciangsana No. 4111 Gunung Putri - Bogor 16968</div>
+                </div>
+                <div class="c x1 y4 w4 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Telp. (021) 82492303</div>
+                </div>
+                <div class="c x1 y5 w5 h5">
+                    <div class="t m0 x2 h4 y6 ff2 fs0 fc0 sc0 ls0 ws0">No. Izin PBF :</div>
+                </div>
+                <div class="c x0 y7 w6 h6">
+                    <div class="t m0 x3 h7 y8 ff1 fs1 fc0 sc0 ls0 ws0">FORM PEMERIKSAAN PENERIMAAN OBAT</div>
+                </div>
+                <div class="c x0 y9 w6 h2">
+                    <div class="t m0 x4 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">No : 12012212</div>
+                </div>
+                <div class="c x0 ya w7 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Tanggal Terima</div>
+                </div>
+                <div class="c x1 ya w8 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">:</div>
+                </div>
+                <div class="c x5 ya w9 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">{{tglterima}}</div>
+                </div>
+                <div class="c x6 ya wa h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Pemasok / Pengirim</div>
+                </div>
+                <div class="c x7 ya wb h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">:</div>
+                </div>
+                <div class="c x8 ya wc h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">{{nmsp}}</div>
+                </div>
+                <div class="c x0 yb w7 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">No. Faktur / SPB</div>
+                </div>
+                <div class="c x1 yb w8 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">:</div>
+                </div>
+                <div class="c x5 yb wd h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">{{nofaktur}}</div>
+                </div>
+                <div class="c x6 yb wa h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Nama Supir</div>
+                </div>
+                <div class="c x7 yb wb h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">:</div>
+                </div>
+                <div class="c x8 yb we h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">{{sopir}}</div>
+                </div>
+                <div class="c x0 yc w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">No. SP Referensi</div>
+                </div><div class="c x1 yc w8 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">:</div>
+                </div>
+                <div class="c x5 yc wf h2">
+                    <!-- <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">{{nosp}}</div> -->
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">{{nosp}}</div>
+                </div>
+                <div class="c x6 yc w10 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">No. Kendaraan</div>
+                </div>
+                <div class="c x7 yc wb h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">:</div>
+                </div>
+                <div class="c x8 yc we h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">{{nopol}}</div>
+                </div>
+                <div class="c x0 ye wd h8">
+                    <div class="t m0 x9 h3 yf ff1 fs0 fc0 sc0 ls0 ws0">PEMERIKSAAN</div>
+                </div>
+                <div class="c x5 ye wf h8">
+                    <div class="t m0 x2 h3 yf ff1 fs0 fc0 sc0 ls0 ws0">HASIL</div>
+                </div>
+                <div class="c xa ye w11 h8">
+                    <div class="t m0 xb h3 yf ff1 fs0 fc0 sc0 ls0 ws0">KETERANGAN</div>
+                </div>
+                <div class="c x0 y10 w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Nama Obat</div>
+                </div>
+                {% if optobat == 'V' %}
+                    <div class="c x5 y10 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y10 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y10 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y10 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+    
+                {% else %}
+                    <div class="c x5 y10 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y10 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y10 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y10 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y10 w11 h2">
+                    <div class="t m0 x10 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">{{nmobat}}</div>
+                </div>
+                <div class="c x0 y11 w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Kekuatan Sediaan</div>
+                </div>
+                {% if optkekuatan == 'V' %}
+                    <div class="c x5 y11 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y11 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y11 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y11 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y11 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y11 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y11 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y11 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y11 w11 h2">
+                    <div class="t m0 x10 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div><div class="c x0 y12 w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Bentuk Sediaan</div>
+                </div>
+                {% if optbentuk == 'V' %}
+                    <div class="c x5 y12 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y12 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y12 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y12 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y12 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y12 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y12 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y12 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y12 w11 h2">
+                    <div class="t m0 x10 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c x0 y13 w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Manufaktur / Produsen</div>
+                </div>
+                {% if optpabrik == 'V' %}
+                    <div class="c x5 y13 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y13 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y13 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y13 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y13 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y13 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y13 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y13 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y13 w11 h2">
+                    <div class="t m0 x10 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c x0 y14 w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Nomor Izin Edar</div>
+                </div>
+                {% if optnie == 'V'%}
+                    <div class="c x5 y14 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y14 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y14 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y14 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y14 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y14 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y14 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y14 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y14 w11 h2">
+                    <div class="t m0 x10 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c x0 y15 w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Nomor Batch</div>
+                </div>
+                {% if optbatch == 'V' %}
+                    <div class="c x5 y15 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y15 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y15 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y15 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y15 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y15 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y15 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y15 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y15 w11 h2">
+                    <div class="t m0 x10 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c x0 y16 w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tgl Kedaluwarsa</div>
+                </div>
+                {% if optexp == 'V' %}
+                    <div class="c x5 y16 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y16 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y16 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y16 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y16 wf h2">
+                        <div class="t m0 xc h4 yd ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y16 w12 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y16 w13 h2">
+                        <div class="t m0 xe h4 yd ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y16 w14 h2">
+                        <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y16 w11 h2">
+                    <div class="t m0 x10 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c x0 y17 w7 h9">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Jumlah Obat</div>
+                </div>
+                {% if optjumlah == 'V'%}
+                    <div class="c x5 y17 wf h9">
+                        <div class="t m0 xc h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y17 w12 h9">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y17 w13 h9">
+                        <div class="t m0 xe h4 y2 ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y17 w14 h9">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y17 wf h9">
+                        <div class="t m0 xc h4 y2 ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y17 w12 h9">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y17 w13 h9">
+                        <div class="t m0 xe h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y17 w14 h9">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y17 w11 h9">
+                    <div class="t m0 x10 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c x0 y18 w7 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Daftar Harga Obat</div>
+                </div>
+                {% if optharga == 'V' %}
+                    <div class="c x5 y18 wf h2">
+                        <div class="t m0 xc h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y18 w12 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y18 w13 h2">
+                        <div class="t m0 xe h4 y2 ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y18 w14 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y18 wf h2">
+                        <div class="t m0 xc h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y18 w12 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y18 w13 h2">
+                        <div class="t m0 xe h4 y2 ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y18 w14 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y18 w11 h2">
+                    <div class="t m0 x10 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c x0 y19 w7 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Kondisi Fisik</div>
+                </div>
+                {% if optfisik == 'V'%}
+                    <div class="c x5 y19 wf h2">
+                        <div class="t m0 xc h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xd y19 w12 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y19 w13 h2">
+                        <div class="t m0 xe h4 y2 ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xf y19 w14 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% else %}
+                    <div class="c x5 y19 wf h2">
+                        <div class="t m0 xc h4 y2 ff2 fs0 fc0 sc0 ls0 ws0"></div>
+                    </div>
+                    <div class="c xd y19 w12 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Sesuai</div>
+                    </div>
+                    <div class="c x6 y19 w13 h2">
+                        <div class="t m0 xe h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">V</div>
+                    </div>
+                    <div class="c xf y19 w14 h2">
+                        <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Tidak Sesuai</div>
+                    </div>
+
+                {% endif %}
+                <div class="c xa y19 w11 h2">
+                    <div class="t m0 x10 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">-</div>
+                </div>
+                <div class="c xf y1a w15 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Bogor, 25 November 2020</div>
+                </div>
+                <div class="c xf y1b w14 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">Menyetujui,</div>
+                </div>
+                <div class="c x0 y1c w7 h2">
+                    <div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">Checker</div>
+                </div>
+                <div class="c x5 y1c w9 h2">
+                    <div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">Saksi</div>
+                </div>
+                <div class="c xf y1c w16 h2">
+                    <div class="t m0 x2 h3 y2 ff1 fs0 fc0 sc0 ls0 ws0">Apoteker Penanggung Jawab</div>
+                </div>
+                <div class="c x0 y1d w7 ha">
+                    <div class="t m0 x2 h4 y1e ff2 fs0 fc0 sc0 ls0 ws0">(Tanda tangan)</div>
+                </div>
+                <div class="c x5 y1d w9 ha">
+                    <div class="t m0 x2 h4 y1e ff2 fs0 fc0 sc0 ls0 ws0">(Tanda tangan)</div>
+                </div>
+                <div class="c xf y1d w16 ha">
+                    <div class="t m0 x2 h4 y1e ff2 fs0 fc0 sc0 ls0 ws0">(Tanda tangan &amp; Stempel)</div>
+                </div>
+                <div class="c x0 y1f w7 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">{{checker}}</div>
+                </div>
+                <div class="c x5 y1f w9 h2">
+                    <div class="t m0 x2 h4 yd ff2 fs0 fc0 sc0 ls0 ws0">{{saksi}}</div>
+                </div>
+                <div class="c xf y1f w16 h2">
+                    <div class="t m0 x2 hb yd ff3 fs0 fc0 sc0 ls0 ws0">Apt. Rusvaira Khairunnisa., S.Farm </div>
+                </div>
+                <div class="c xf y20 w17 h2">
+                    <div class="t m0 x2 h4 y2 ff2 fs0 fc0 sc0 ls0 ws0">No. SIPA</div>
+                </div>
+            </div>
+            <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+        </div>
+    </div>
+    <div class="loading-indicator">
+
+    </div>
+</body>
+</html>

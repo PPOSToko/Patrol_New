@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>SEJATI</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/scb-production.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/scb-skins.min.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/styles.css') }}">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/ico.png') }}" type="image">
+		<link rel="icon" href="{{ url_for('static', filename='img/favicon/ico.png') }}" type="image">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	</head>
+	<body class="smart-style-7 menu-on-top fixed-navigation fixed-header fixed-page-footer">
+		
+		<header id="header">
+			<div id="logo-group">
+				<span id="logo"> <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SCB"> </span>
+			</div>
+		</header>
+		
+		<div id="main" role="main">
+         <div id="content">
+				<div class="row no-mg">
+				
+					<div class="col-xs-10 col-sm-10 col-md-12 col-lg-12">
+				
+						<div class="row">
+							<div class="col-md-12">
+								<div class="text-center error-box">
+									<h1 class="error-text tada animated">
+                              <i class="fa fa-times-circle text-danger error-icon-shadow"></i>
+                           </h1>
+									<br />
+									<p class="lead semi-bold">
+										<strong>Aplikasi dalam tahap Pembuatan<br>Tekan F5 untuk kembali ke menu utama</strong><br><br>
+									</p>
+								</div>
+				
+                     </div>
+
+                     <div class="col-md-12 text-center">
+                        <small>
+                              <strong>PT. Kreasi Usaha Cipta Utama</strong><br>
+                              Jl. Raya Ciangsana No 4111 Gunung Putri <br>
+                              Jawa Barat Indonesia<br>
+                              Email: <a href="mailto:ali@kreasi.co">ali@kreasi.co</a><br>
+                              Website : <a href="http://kreasi.co" target="_blank">www.kreasi.co</a>
+                           
+                        </small>
+                     </div>
+					
+						</div>
+				
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div id="pagefooter" class="page-footer">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<span class="txt-color-white">SEJATI &copy;2019<br>{{curpath}}</span>
+				</div>
+			</div>
+		</div>
+		
+		<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/app.config.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+	</body>
+</html>

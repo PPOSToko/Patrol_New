@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <title>Q-Patrol</title>
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+      <!-- Font Awesome Icons -->
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <!-- material Icons -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+      <!-- CSS Files -->
+      <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <title>Q-Patrol</title>
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+      <!-- Font Awesome Icons -->
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <!-- material Icons -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+      <!-- CSS Files -->
+      <link id="pagestyle" href="{{ url_for('static', filename='css/material-dashboard.css') }}"  rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.min.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/rowGroup.bootstrap.min.css') }}">
+
+    
+    </head>
+    <body class="g-sidenav-show  bg-gray-100">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+          <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+            </nav>
+            <ul class="navbar-nav  justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/home">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10 ">home</i>
+                      <span class="nav-link-text ms-1">Home</span>
+                    </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/logout">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10">logout</i>
+                      <span class="nav-link-text ms-1">Sign Out</span>
+                    </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>     
+        <div class ="mask gradient-custom"></div>
+        <div class="container-fluid py-4">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2" >
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Manage Employee</h6>
+                </div>
+                </div>
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="inputEmail3">Nama Employee</label>
+                            <div class="input-group input-group-outline my-2">
+                                <input type="text" id="cnama_employee" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="jabatan">Jabatan</label>
+                            <div class="input-group input-group-outline my-2">
+                                <select class="form-control" id="cjabatan_employee">
+                                    <option value=""></option>
+                                    <option value="1">Leader</option>
+                                    <option value="0">Operator</option>
+                                </select>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="status_employee">Status</label>
+                            <div class="input-group input-group-outline my-2">
+                                <select class="form-control" id="cstatus_employee">
+                                    <option value=""></option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Non Aktif</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="show_employee();" class="btn bg-gradient-info">Search</button>
+                    <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#modalinputemployee">Employee</button>
+                </div>  
+                </div>
+                    <!-- Modal edit -->
+                <div class="modal fade" id="editemployee"   data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="modalinputemployee" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title font-weight-normal" id="exampleModalLabel"> Edit Employee</h5>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nama_employee">Nama Employee</label>
+                                <div class="input-group input-group-outline my-3">
+                                    <input type="hidden" id="eid_employee" class="form-control">
+                                    <input type="text" id="enama_employee" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="jabatan">Jabatan</label>
+                                        <div class="input-group input-group-outline my-2">
+                                            <select class="form-control" id="ejabatan_employee">
+                                                <option value="1">Leader</option>
+                                                <option value="0">Operator</option>
+                                            </select>
+                                        </div>
+                                    </div> 
+                                </div>   
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="status_employee">Status</label>
+                                        <div class="input-group input-group-outline my-2">
+                                            <select class="form-control" id="estatus_employee">
+                                                <option value="1">Aktif</option>
+                                                <option value="0">Non Aktif</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="edit_employee();">Accept</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="modalinputemployee"   data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="submitinduk" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                    <h5 class="modal-title font-weight-normal" id="exampleModalLabel"> Input Employee</h5>
+                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nama_employee">Nama Employee baru</label>
+                                    <div class="input-group input-group-outline my-3">
+                                        <input type="text" id="nama_employee" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="jabatan">Jabatan</label>
+                                            <div class="input-group input-group-outline my-2">
+                                                <select class="form-control" id="jabatan_employee">
+                                                    <option value="Leader">Leader</option>
+                                                    <option value="Operator">Operator</option>
+                                                </select>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <label for="status_employee">Status</label>
+                                            <div class="input-group input-group-outline my-2">
+                                                <select class="form-control" id="status_employee">
+                                                    <option value="1">Aktif</option>
+                                                    <option value="0">Non Aktif</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="accept_employee();">
+                                    Accept
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-- modal end -->
+                <div class="container-fluid py-4">
+                    <div class="row">
+                            <div class="table-responsive p-0">
+                                <table id="tabelemployee" class="table align-items-center mb-0" >
+                                    <thead>
+                                        <tr>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center ">ID Employee</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left ">Nama Employee</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left">Jabatan</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left">Status</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- <tbody>
+                                        <tr>
+                                            <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">1</p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">Widy</p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">Leader</p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">Active</p>
+                                            </td>
+                
+                                            <td class="align-middle text-center">
+                                                <a href="#" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#editemployee" data-original-title="Edit Employee" onclick="edit_employee();">
+                                                    <span class="badge badge-sm bg-gradient-success">Edit</span> 
+                                                    </a>
+                                                    
+                                                    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">2</p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0">Fariz</p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">Leader</p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">Active</p>
+                                            </td>
+                                            <td class="align-middle text-center">
+
+                                                <a href="#" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#editemployee" data-original-title="Edit employee">
+                                                <span class="badge badge-sm bg-gradient-success">Edit</span> 
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody> -->
+                                </table>
+                            </div>
+                    </div>
+                </div>
+            
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-12mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-shadow">
+                            <center><a href="http://192.168.30.3/support/" class="font-weight-bold" target="_blank" style="color: rgb(0, 0, 0);">Copyright ©IT - PT.Cahayajakarta @2022</a></center>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+    <script>
+        function accept_employee(){
+            var id_employee = $('#id_employee').val();
+            var nama_employee  = $('#nama_employee').val();
+            var jabatan_employee  = $('#jabatan_employee').val();
+            var status_employee  = $('#status_employee').val();
+            if (nama_employee == "" || jabatan_employee == "" || status_employee == ""){
+                bootbox.alert({
+                    message: "Isian data belum lengkap silahkan periksa ulang",
+                    className: 'rubberBand animated'
+                });
+            }else{
+
+                bootbox.confirm({
+                    message: "Simpan data employee?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        // console.log('This was logged in the callback: ' + result);
+                        if(result){
+                        $.ajax({
+                            type    : 'POST',
+                            url     : '/simpanemployee',
+                            dataType: 'json',
+                            data    : {
+                                'nama_employee':nama_employee,'jabatan_employee':jabatan_employee,'status_employee': status_employee
+                            },
+                            success : function(response){
+                                waitingDialog.hide();
+                                if(response.status=='1'){
+                                    $('#nama_employee').val('');
+                                    $('#jabatan_employee').val('');
+                                    var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                    var box = bootbox.alert(msg);
+                                    $('#modalinputemployee').modal('hide');
+                                    $('#tabelemployee').DataTable().ajax.reload();
+                                }else{
+                                    msg_alert_warning(response.msg, '#nmsp');
+                                }
+                            },
+                            error: function(error){
+                                console.log(error);
+                                waitingDialog.hide();
+                                if(error.status == 403){
+                                    msg_server_reloading();
+                                }else{
+                                    msg_alert_warning('Data gagal diproses !', '#nmsp');
+                                }
+                            }
+                        })
+                        }
+
+                    }
+                });        
+
+
+            }
+          
+        }
+          function edit_employee(){
+            var id_employee = $('#eid_employee').val();
+            var nama_employee  = $('#enama_employee').val();
+            var jabatan_employee  = $('#ejabatan_employee').val();
+            var status_employee  = $('#estatus_employee').val();
+            bootbox.confirm({
+                    message: "Edit data employee?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        // console.log('This was logged in the callback: ' + result);
+                        if(result){
+                        $.ajax({
+                            type    : 'POST',
+                            url     : '/editemployee',
+                            dataType: 'json',
+                            data    : {
+                                'id_employee':id_employee,'nama_employee':nama_employee,'jabatan_employee':jabatan_employee,'status_employee': status_employee
+                            },
+                            success : function(response){
+                                waitingDialog.hide();
+                                if(response.status=='1'){
+                                    $('#nama_employee').val('');
+                                    $('#jabatan_employee').val('');
+                                    var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                    var box = bootbox.alert(msg);
+                                    $('#modalinputemployee').modal('hide');
+                                    $('#tabelemployee').DataTable().ajax.reload();
+                                }else{
+                                    msg_alert_warning(response.msg, '#nmsp');
+                                }
+                            },
+                            error: function(error){
+                                console.log(error);
+                                waitingDialog.hide();
+                                if(error.status == 403){
+                                    msg_server_reloading();
+                                }else{
+                                    msg_alert_warning('Data gagal diproses !', '#nmsp');
+                                }
+                            }
+                        })
+                        }
+
+                    }
+                });        
+
+        }
+
+        
+    </script>
+
+    <!-- batas isi -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/chartjs.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/funct.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/create.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.colVis.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.tableTools.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/jquery-validate/jquery.validate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/masked-input/jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/material-dashboard.min.js') }}"></script>
+    <script>
+    function show_employee(){
+        var id_employee = $('#id_employee').val();
+        var nama_employee  = $('#cnama_employee').val();
+        var jabatan_employee  = $('#cjabatan_employee').val();
+        var status_employee  = $('#cstatus_employee').val();
+        var table = $('#tabelemployee').DataTable({
+          "ajax":{
+               "url":"/viewemployee",
+               "data": function(d){
+                      d.idempolyee = id_employee,d.nama_employee = nama_employee,d.jabatan_employee=jabatan_employee,d.status_employee = status_employee;
+                },
+  
+               "error": function(){
+                  msg_server_reloading();
+               }
+            },
+            // ,nama,jabatan,status
+            "columns":[
+               {"data": "id_karyawan", "className":"align-middle text-left text-sm","width":"5%",  "targets":"0"},
+               {"data": "nama","className":"align-middle text-left text-sm", "targets":"1"},
+               {"data": "jabatan", "className":"align-middle text-left text-sm text-wrap","targets":"2"},
+               {"data": "status",  "className":"align-middle text-left text-sm text-wrap","targets":"3"},
+               {"data": null, "orderable": false, "className":"text-center", "width":"5%", "targets":"7",
+                  "render":function(data){
+                    // return '<button class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#ModalEditPertanyaan" type="button">Edit</button>'
+                     return '<button id="bDetil" data-toggle="tooltip" data-placement="left"  data-original-title="Detil" style="background:initial;border:none;" >'+
+                           '<i class="fa fa-edit txt-color-blue"></i>'+
+                           '</button>';
+                  }
+               }
+            ],
+            "destroy": true,
+            "deferRender": true,
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+               "t"+
+               "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "oLanguage": {
+               "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+               "sInfo": "Total : _TOTAL_ Data",
+               "sInfoEmpty":"Total : _MAX_ data",
+               "sInfoFiltered":"",
+               "sLengthMenu": "_MENU_",
+               "sZeroRecords": "<strong class='text-danger'><i class='fa fa-warning'></i> Data tidak ditemukan !</strong>",
+               "sLoadingRecords": "<strong><i class='fa fa-spinner fa-spin'></i> Memuat data ...</strong>",
+               "sEmptyTable": "<strong class='text-danger'><i class='fa fa-warning'></i> Tidak ada data !</strong>",
+               "oPaginate": {
+                  "sNext":">",
+                  "sPrevious":"<"
+               }
+            },
+            "order": [0, "asc"],
+            // // "sScrollY": auto_height_table('#showklasifikasipsn'),
+            "autoWidth" : false,
+            "responsive": true,
+            "ordering": false,
+            "lengthChange": true,
+            
+  
+        });
+        $('#tabelemployee tbody').on( 'click', 'button', function(){
+            var data = table.row($(this).closest('tr')).data();
+            if(this.id=='bDetil'){
+              $('#eid_employee').val(data.id_karyawan);
+              $('#enama_employee').val(data.nama);
+              if (data.jabatan=="Leader"){
+                $('#ejabatan_employee').val(1);
+              }else{
+                $('#ejabatan_employee').val(0);
+              }
+              if (data.status == "Aktif"){
+                $('#estatus_employee').val(1);
+              }else{
+                $('#estatus_employee').val(0);
+              }
+              
+              $('#editemployee').modal('show'); 
+            }
+         });
+  
+      }
+  
+
+    </script>
+</html>

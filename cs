@@ -1,0 +1,2 @@
+localhost
+scb_default

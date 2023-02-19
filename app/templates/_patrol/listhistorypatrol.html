@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png"> -->
+      <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <title>Q-Patrol</title>
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+      <!-- Nucleo Icons -->
+      <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+      <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+      <!-- Font Awesome Icons -->
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <!-- material Icons -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+      <!-- CSS Files -->
+      <link id="pagestyle" href="{{ url_for('static', filename='css/material-dashboard.css') }}"  rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.min.css') }}">
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/rowGroup.bootstrap.min.css') }}">
+    </head>
+    <body class="g-sidenav-show  bg-gray-100">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+          <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+            </nav>
+            <ul class="navbar-nav  justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/home">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10 ">home</i>
+                      <span class="nav-link-text ms-1">Home</span>
+                    </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/logout">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10">logout</i>
+                      <span class="nav-link-text ms-1">Sign Out</span>
+                    </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>     
+        <div class ="mask gradient-custom"></div>
+        <div class="container-fluid py-4">
+          <div class="row">
+            <div class="card">
+                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                      <div class="card-header p-3 pt-2">
+                        <!-- <div></div> -->
+                        <div class="text-end pt-1">
+                        </div>
+                      </div> 
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group input-group-static">
+                          <label for="exampleFormControlSelect1" class="ms-0">Petugas Patrol</label>
+                          <input id="petugas" value="{{petugas}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="input-group input-group-static mb">
+                        <label for="exampleFormControlSelect1" class="ms-0">Korlap</label>
+                        <!-- <div class="input-group input-group-outline my-3"> -->
+                          <select class="form-control" id="nmleader">
+                          </select>
+                        <!-- </div> -->
+                          </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group input-group-static mb-2">
+                          <label for="exampleFormControlSelect1" class="ms-0">Induk</label>
+                            <select class="form-control" id="nminduk">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="input-group input-group-static mb-2">
+                          <label for="exampleFormControlSelect1" class="ms-0">Operator</label>
+                            <select class="form-control" id="nmopr">
+                            </select>
+       
+                       </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group input-group-static my-3">
+                          <label>Start Date From </label>
+                          <input type="date" id="start_from" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group input-group-static my-3">
+                          <label>Start Date To</label>
+                          <input type="date" id="start_to" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="input-group input-group-static my-3">
+                        <label for="exampleFormControlSelect1" class="ms-0">Status</label>
+                        <select class="form-control" id="status">
+                          <option>Finished</option>
+                          <option>Unfinished</option>
+                        </select>
+                      </div>
+                  </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                      <button class="btn btn-info" type="button">Search</button>            
+                  </div>      
+                  <div class="container-fluid py-4">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card my-4">
+                          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2" >
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                              <h6 class="text-white text-capitalize ps-3">Review Patrol History</h6>
+                            </div>
+                          </div>
+                          <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                              <table id='tabelhistory' class="table align-items-center mb-0">
+                                <thead>
+                                  <tr>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center ">Patrol ID</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Induk</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Petugas</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Korlap</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">OPerator</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Start Date</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Status</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Skor</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-center">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                      <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">1</p>
+                                      </td>
+                                      <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">Printing</p>
+                                      </td>
+                                      <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0">Ali</p>
+                                      </td>
+                                      <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                      </td>
+                                      <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">Finished</span> 
+                                      </td>
+                                      <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">90</span>
+                                      </td>
+                                      <td class="align-middle text-center">
+                                          <a href="view_detail.html" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                            <span class="badge badge-sm bg-gradient-success">View Detail</span> 
+                                          </a>
+                                          <a href="update_patrol.html" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                            <span class="badge badge-sm bg-gradient-success">Update</span> 
+                                          </a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="align-middle text-center text-sm">
+                                      <p class="text-xs font-weight-bold mb-0">1</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                      <p class="text-xs font-weight-bold mb-0">Printing</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                      <p class="text-xs font-weight-bold mb-0">Ali</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold">Finished</span> 
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold">90</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="view_detail.html" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                          <span class="badge badge-sm bg-gradient-success">View Detail</span> 
+                                        </a>
+                                        <a href="update_patrol.html" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                          <span class="badge badge-sm bg-gradient-success">Update</span> 
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <footer class="footer">
+                      <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                          <div class="col-lg-12mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-shadow">
+                              <center><a href="http://192.168.30.3/support/" class="font-weight-bold" target="_blank" style="color: rgb(0, 0, 0);">Copyright ©IT - PT.Cahayajakarta @2022</a></center>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </footer>
+                  </div>
+            </div>
+          </div>
+        </div>
+    </body>
+    <script src="./assets/js/core/bootstrap.min.js" ></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/material-dashboard.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/funct.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/create.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+  
+    <script>
+      $(document).ready(function(){
+        cariinduk();
+        carileader();
+        cariopr();
+      });
+
+      function show_historypatrol(){
+          var cnminduk = $('#cnminduk').val(),cnmpoint = $('#cnmpoint').val();
+          var table = $('#tabelhistory').DataTable({
+            "ajax":{
+                "url":"/viewunfinish",
+                // "data": function(d){
+                //         d.induk = cnminduk,d.point=cnmpoint;
+                //   },
+                "error": function(){
+                    msg_server_reloading();
+                }
+              },
+              "columns":[
+                {"data": "id_patrol", "className":"align-middle text-center text-sm",  "targets":"0"},
+                {"data": "nminduk","className":"align-middle text-left text-sm", "targets":"1"},
+                {"data": "star_date", "className":"align-middle text-left text-sm text-wrap","targets":"2"},
+                {"data": "progress","className":"align-middle text-left text-sm text-wrap","targets":"4"},
+                {"data": "dijawab","className":"align-middle text-center text-sm", "targets":"5"},
+                {"data": null, "orderable": false, "className":"text-center", "width":"5%", "targets":"7",
+                    "render":function(data){
+                      // return '<button class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#ModalEditPertanyaan" type="button">Edit</button>'
+                      return '<button id="bDetil" data-toggle="tooltip" data-placement="left"  data-original-title="Resume" style="background:initial;border:none;" >'+
+                            '<i class="fa fa-edit txt-color-blue"></i>'+
+                            '</button>';
+                    }
+                }
+              ],
+              "destroy": true,
+              "searching": false,
+              "bInfo": false,
+              "deferRender": true,
+              "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+                "t"+
+                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+              "oLanguage": {
+                "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+                "sInfo": "Total : _TOTAL_ Data",
+                "sInfoEmpty":"Total : _MAX_ data",
+                "sInfoFiltered":"",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "<strong class='text-danger'><i class='fa fa-warning'></i> Data tidak ditemukan !</strong>",
+                "sLoadingRecords": "<strong><i class='fa fa-spinner fa-spin'></i> Memuat data ...</strong>",
+                "sEmptyTable": "<strong class='text-danger'><i class='fa fa-warning'></i> Tidak ada data !</strong>",
+                "oPaginate": {
+                    "sNext":">",
+                    "sPrevious":"<"
+                }
+              },
+              "order": [0, "asc"],
+              // // "sScrollY": auto_height_table('#showklasifikasipsn'),
+              "autoWidth" : false,
+              "responsive": true,
+              "ordering": false,
+              "lengthChange": true,
+              
+
+          });
+          $('#tabelhistory tbody').on( 'click', 'button', function(){
+              var data = table.row($(this).closest('tr')).data();
+              if(this.id=='bDetil'){
+                window.location.href = '/mulaipatrol?idpatrol=' + data.id_patrol;
+              }else if(this.id=='bPrint'){
+                window.open("/cetakpemasok/" +data.kdsp,"Cetak Form Verifikasi Pemasok","dialog=yes","scrollbars=yes");
+              }
+          });
+
+        }
+
+  </script>
+  </html>

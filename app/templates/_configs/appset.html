@@ -1,0 +1,137 @@
+<section id="widget-grid" class="">
+   <div class="row no-mg">
+      <article class="col-md-12 col-xs-12 no-pd">
+         <div class="jarviswidget jarviswidget-color-blueDark no-mg" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+            <header>
+               <span class="widget-icon"> <i class="fa fa-th-list txt-color-white"></i> </span>
+               <h2>Pengaturan</h2>
+               <div class="widget-toolbar">
+                  <div class="demo-btns">
+                     <button type="button" class="btn btn-danger btn-xs res-btn" value="Tutup" onclick="tombol(this.value)">
+                        <i class="fa fa-sign-out"></i>
+                        <span> Tutup</span>
+                     </button>
+                  </div>
+               </div>
+               <ul class="nav nav-tabs pull-right in" id="myTab">
+                  <li class="active">
+                     <a data-toggle="tab" href="#s1"><i class="fa fa-gear"></i> <span class="hidden-mobile hidden-tablet">Aplikasi</span></a>
+                  </li>
+                  <li>
+                     <a data-toggle="tab" href="#s2"><i class="fa fa-database"></i> <span class="hidden-mobile hidden-tablet">Clear Bank Data</span></a>
+                  </li>
+                  <li>
+                     <a data-toggle="tab" href="#s3"><i class="fa fa-reorder"></i> <span class="hidden-mobile hidden-tablet">Menu Utama</span></a>
+                  </li>
+               </ul>
+            </header>
+            <div>
+               <div class="widget-body">
+                  <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="s1">
+                           <div class="row">
+                              <div class="col-md-12 col-xs-12 no-pd pd-bottom-10">
+                                 <div id="showconfig"></div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                        <div class="tab-pane fade in" id="s2">
+                           <div class="row">
+                              <div class="col-md-12 col-xs-12 no-pd">
+                                 <div id="showdb" class="no-padding"></div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="tab-pane fade in" id="s3">
+                           <div class="row">
+                              <div class="form-group col-md-12 col-xs-12">
+                                    <div class="panel-group smart-accordion-default" id="accordion-2">
+                                       <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                             <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion-2" href="#pMenu">
+                                                   <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> Menu
+                                                </a>
+                                             </h4>
+                                          </div>
+                                          <div id="pMenu" class="panel-collapse collapse in">
+                                             <div class="panel-body no-padding">
+                                                <div id="showmenu"></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                             <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-2" href="#pSubMenu" class="collapsed"> <i class="fa fa-fw fa-plus-circle txt-color-green"></i> <i class="fa fa-fw fa-minus-circle txt-color-red"></i> Sub Menu </a></h4>
+                                          </div>
+                                          <div id="pSubMenu" class="panel-collapse collapse">
+                                             <div class="panel-body no-padding">
+                                                <div id="showsubmenu"></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </article>
+   </div>
+</section>
+<script>
+   $(document).ready(function(){
+      pageSetUp();
+      showconfig();
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+         var target = $(e.target).attr("href")
+         if(target=='#s1'){
+            showconfig();
+         }else if(target=='#s2'){
+            showdb();
+         }else if(target=='#s3'){
+            showmainmenu();
+            showsubmenu();
+         }
+      });
+      
+      $('a[data-toggle="collapse"]').click(function (e) {
+         var target = $(e.target).attr("href");
+         if(target=='pDB'){
+            showdb();
+         }else if(target=='pMenu'){
+            showmainmenu();
+         }else if(target=='pSubMenu'){
+            showsubmenu();
+         }
+      });
+   });
+
+   function tombol(val){
+      if(val=="Tutup"){
+         location.reload();
+      }
+   };
+
+   function showconfig(){
+      load_page('/getconfig',{'link':'/_configs/config.html'}, '#showconfig');
+   };
+
+   function showdb(){
+      load_page('/loadpage',{'link':'/_configs/tdb.html'}, '#showdb');
+   };
+
+   function showmainmenu(){
+      load_page('/loadpage', {'link':'/_menu/tmenu.html'}, '#showmenu');
+   };
+
+   function showsubmenu(){
+      load_page('/loadpage', {'link':'/_menu/tsubmenu.html'}, '#showsubmenu');
+   };
+</script>

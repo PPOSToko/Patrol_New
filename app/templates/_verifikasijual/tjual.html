@@ -1,0 +1,69 @@
+<div id="widget-grid" class="">
+    <div class="row no-mg">
+       <div class="col-md-12 col-xs-12 no-pd">
+          <div class="jarviswidget jarviswidget-color-blueDark no-mg" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+             <header>
+                <span class="widget-icon"> <i class="fa fa-th-list txt-color-white"></i> </span>
+                <h2>Daftar Pemeriksaan Penyaluran Barang | Obat </h2>
+                <div class="widget-toolbar">
+                   <div class="demo-btns pull-right">
+                      <button type="button" class="btn btn-primary btn-xs res-btn" value="Reload" onclick="tombolperiksapenyaluran(this.value)">
+                         <i class="fa fa-undo"></i>
+                         <span> Reload</span>
+                      </button>
+                      <button type="button" class="btn btn-success btn-xs res-btn" value="Print" onclick="tombolperiksapenyaluran(this.value)">
+                         <i class="fa fa-print"></i>
+                         <span> Cetak Ulang Hasil Pemeriksaan</span>
+                      </button>
+
+                      <button type="button" class="btn btn-danger btn-xs res-btn" value="Tutup" onclick="tombolperiksapenyaluran(this.value)" >
+                         <i class="fa fa-sign-out"></i>
+                         <span> Tutup</span>
+                      </button>
+                   </div>
+                </div>
+             </header>
+             <div>
+                <div class="widget-body no-padding">
+                   <div class="row no-mg">
+                      <div id='showverifjual'></div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <div id='loadform'></div>
+ <div id="showcarisatuan"></div>
+ <div id="showprinting"></div>
+ 
+ <script>
+    $(document).ready(function(){
+       pageSetUp();
+       show_data_verifjual();
+    });
+ 
+    function tombolperiksapenyaluran(val){
+       if(val=='Tambah'){
+          load_page('/openform', {'link':'/_pelanggan/fpelangga.html', 'com':'create'}, '#loadform');
+      }else if(val=='Print'){
+         bootbox.prompt("Masukan Nomor Tanda Terima Barang yang akan dicetak!", function(result){ 
+            load_page('/printformpenyaluran', {
+                              'link':'/_print/cetakformpenyaluran.html',
+                              'nonota':result
+                           }, '#showprinting');
+
+         });
+
+      }else if(val=='Reload'){
+          load_page('/loadpage', {'link':'/_verifikasijual/tjual.html'}, '#content');
+       }else if(val=='Tutup'){
+          goto_menu();
+       }
+    };
+ 
+    function show_data_verifjual(){
+       load_page('/loadpage', {'link':'/_verifikasijual/listverifjual.html'}, '#showverifjual');
+    };
+ </script>

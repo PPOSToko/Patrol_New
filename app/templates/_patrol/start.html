@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='img/apple-icon.png') }} ">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/cj logo 2.png') }} ">
+    <title>Q-Patrol</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <link id="pagestyle" href="{{ url_for('static', filename='css/nucleo-icons.css') }}"  rel="stylesheet" />
+    <link id="pagestyle" href="{{ url_for('static', filename='css/nucleo-svg.css') }}"  rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link id="pagestyle" href="{{ url_for('static', filename='css/material-dashboard.css') }}"  rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.css') }}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.flexdatalist.min.css') }}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/rowGroup.bootstrap.min.css') }}">
+    <!-- search -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}"> -->
+  
+  </head>
+  
+<body class="g-sidenav-show  bg-gray-100">
+
+  <main class="main-content border-radius-lg ">
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+        </nav>
+        <ul class="navbar-nav  justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/home">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10 ">home</i>
+                  <span class="nav-link-text ms-1">Home</span>
+                </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/logout">
+              
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10">logout</i>
+                  <span class="nav-link-text ms-1">Sign Out</span>
+                </div>
+            </a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+  <div class ="mask gradient-custom"> </div>
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card-header p-3 pt-2">
+                  <div class="text-end pt-1">
+                  </div>
+                </div> 
+            </div>        
+            <div class="container">
+              <center><h1>START PATROL </center> 
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group input-group-static mb-2">
+                  <!-- <label class="form-label">ID</label> -->
+                  <label for="exampleFormControlSelect1" class="ms-0">ID</label>
+                  <input id = "idpatrol" value="{{idpatrol}}" class="form-control" readonly>
+                </div>  
+              </div>   
+              <div class="col-md-6">
+                  <div class="input-group input-group-static mb-2">
+                    <label for="exampleFormControlSelect1" class="ms-0">Petugas</label>
+                    <input id="petugas" value="{{petugas}}" class="form-control" readonly>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-group input-group-static mb-2">
+                      <label for="exampleFormControlSelect1" class="ms-0">Induk</label>
+                      <select class="form-control" id="nminduk" onchange="disableopr();">
+                      </select>
+                    </div>
+                    <script>
+                       function disableopr(){
+                        var xinduk = $('#nminduk').val();
+                        if (xinduk == 2){
+                          document.getElementById("nmopr").disabled=true;
+                        }else{
+                          document.getElementById("nmopr").disabled=false;
+                        }
+                       }
+                    </script>
+
+            
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group input-group-static mb-2">
+                      <label for="exampleFormControlSelect1" class="ms-0">Leader</label>
+                      <select class="form-control" id="nmleader">
+                      </select>
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="input-group input-group-static mb-2">
+                    <label class="ms-0">Operator</label>
+                    <select data-live-search="true" data-tokens class=" form-control selectpicker" id="nmopr">
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-4 text-right">
+                      <a href='javascript:mulaipatrol()'><button  class="btn btn-primary" type="button"> Proceed</button></a>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+       </div>
+    </div>
+  </div>
+  <footer class="footer py-4  ">
+    <div class="container-fluid">
+      <div class="row align-items-center justify-content-lg-between">
+        <div class="col-lg-12mb-lg-0 mb-4">
+          <div class="copyright text-center text-sm text-muted text-shadow">
+            <center><a href="http://192.168.30.3/support/" class="font-weight-bold" target="_blank" style="color: rgb(0, 0, 0);">Copyright ©IT - PT.Cahayajakarta @2022</a></center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <!-- <script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/core/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/material-dashboard.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/funct.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/create.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script>
+  <!-- <script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script> -->
+  <!-- <script src="{{ url_for('static', filename='js/startpatrol.js') }}"></script> -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script>
+    $(document).ready(function(){
+      cariinduk();
+      carileader();
+      cariopr();
+      $('#nminduk').focus();
+    });
+    function mulaipatrol(){
+      var nminduk = $('#nminduk').val(),nmleader = $('#nmleader').val(),idpatrol = $('#idpatrol').val(),operator=$('#nmopr').val();
+      if (nminduk == ""){
+        // alert("Induk Pertanyaan Harus dipilih");
+        bootbox.alert({
+            message: "Indux Pertanyaan Harus dipilih",
+            className: 'rubberBand animated'
+        });
+      }else if(nmleader == "" ){  
+        bootbox.alert({
+            message: "Nama leader harus dipilih",
+            className: 'rubberBand animated'
+        });
+
+      }else{
+        if (nminduk == 2 ){
+          xlanjut = 1;
+        }else{
+          if (operator == ""){
+            bootbox.alert({
+            message: "Nama Operator harus dipilih",
+            className: 'rubberBand animated'
+          });
+
+            xlanjut = 0;
+          }else{
+            xlanjut = 1;
+          }
+        }
+        if (xlanjut == 1){
+          $.ajax({
+            type    : 'POST',
+            url     : '/simpanpatrol',
+            dataType: 'json',
+            data    : {
+              'nminduk':nminduk,'nmleader':nmleader,'idpatrol':idpatrol,'operator':operator
+            },
+            success : function(response){
+              waitingDialog.hide();
+              if(response.status=='1'){
+                window.location.href = '/mulaipatrol?idpatrol=' + idpatrol;
+              }else{
+                  msg_alert_warning(response.msg, '#nmsp');
+              }
+            },
+            error: function(error){
+              console.log(error);
+              waitingDialog.hide();
+              if(error.status == 403){
+                  msg_server_reloading();
+              }else{
+                  msg_alert_warning('Data gagal diproses !', '#nmsp');
+              }
+            }
+          });
+
+        }
+
+      }
+
+    }
+  </script>                 
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<div class="col-md-12 col-xs-12">
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">DEBUGING :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <select id="debugs" class="form-control input-sm">
+         <option value="True">True</option>
+         <option value="False">False</option>
+      </select>
+      <script>
+         $('#debugs option[value="{{dbg}}"]').attr('selected', true);
+         enKeyCombo('#debugs', '#env');
+      </script>
+   </div>
+   
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">VIRTUAL ENVIRONMENT :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <select id="env" class="form-control input-sm">
+         <option value="development">Development</option>
+         <option value="production">Production</option>
+      </select>
+      <script>
+         $('#env option[value="{{env}}"]').attr('selected', true);
+         enKeyCombo('#env', '#temp_reload');
+      </script>
+   </div>
+   
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">TEMPLATE AUTO RELOAD :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <select id="temp_reload" class="form-control input-sm">
+         <option value="True">True</option>
+         <option value="False">False</option>
+      </select>
+      <script>
+         $('#temp_reload option[value="{{temp_reload}}"]').attr('selected', true);
+         enKeyCombo('#temp_reload', '#dbname');
+      </script>
+   </div>
+
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">DB HOST :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="dbhost" class="form-control input-sm" value="{{dbhost}}">
+      <script>enKey('#dbhost', '#dbname');</script>
+   </div>
+
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">DB NAME :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="dbname" class="form-control input-sm" value="{{dbname}}">
+      <script>enKey('#dbname', '#serv_name');</script>
+   </div>
+
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">SERVER NAME :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="serv_name" class="form-control input-sm" value="{{serv_name}}">
+      <script>enKey('#serv_name', '#serv_port');</script>
+   </div>
+
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">SERVER PORT :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="serv_port" class="form-control input-sm" value="{{serv_port}}">
+      <script>enKey('#serv_port', '#secret');</script>
+   </div>
+
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">SECRET KEY :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="secret" class="form-control input-sm" value="{{secret}}">
+      <script>enKey('#secret', '#email');</script>
+   </div>
+
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">EMAIL ADDRESS :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="email" class="form-control input-sm" value="{{email}}">
+      <script>enKey('#email', '#website');</script>
+   </div>
+
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">WEB ADDRESS :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="website" class="form-control input-sm" value="{{website}}">
+      <script>enKey('#website', '#template_title');</script>
+   </div>
+   
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">TEMPLATE TITLE :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="template_title" class="form-control input-sm" value="{{template_title}}">
+      <script>enKey('#template_title', '#hd_content');</script>
+   </div>
+   
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">HEAD CONTENT :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <input type="text" id="hd_content" class="form-control input-sm" value="{{hd_content}}">
+      <script>enKey('#hd_content', '#app_start');</script>
+   </div>
+   
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">LOGIN CONTENT :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <textarea id="log_content" class="form-control input-sm">{{log_content}}</textarea>
+   </div>
+   
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <label class="menu-item-parent">APP START :</label>
+   </div>
+   <div class="col-md-6 col-xs-12 pd-left-2 pd-right-2 pd-bottom-10">
+      <select id="app_start" class="form-control input-sm">
+         <option value="ON">ON</option>
+         <option value="OFF">OFF</option>
+      </select>
+      <script>$('#app_start option[value="{{app_start}}"]').attr('selected', true);</script>
+   </div>
+</div>
+
+<div class="col-md-12 col-xs-12">
+   <div class="demo-btns pull-right">
+      <button class="btn btn-primary btn-sm res-btn" onclick="update_config()">
+         <i class="fa fa-save"></i>
+         <span>Perbaharui</span>
+      </button>
+   </div>
+</div>
+
+<script>
+   $(document).ready(function(){
+      $('#debugs').focus();
+   });
+
+   function update_config(){
+      var debugs = $('#debugs').val(), env = $('#env').val(),
+         temp_reload = $('#temp_reload').val(), dbhost = $('#dbhost').val(),
+         dbname = $('#dbname').val(), serv_name = $('#serv_name').val(),
+         serv_port = $('#serv_port').val(), secret = $('#secret').val(), email = $('#email').val(),
+         website = $('#website').val(), template_title = $('#template_title').val(),
+         hd_content = $('#hd_content').val(), log_content = $('#log_content').val(),
+         app_start = $('#app_start').val();
+         
+      $.ajax({
+            type    : 'POST',
+            url     : '/updateconfig',
+            dataType: 'json',
+            data    : {
+                     'debugs':debugs, 'env':env, 'temp_reload':temp_reload, 'dbhost':dbhost,
+                     'dbname':dbname, 'serv_name':serv_name, 'serv_port':serv_port, 'secret':$.md5(secret),
+                     'email':email, 'website':website,'template_title':template_title, 'hd_content':hd_content,
+                     'log_content':log_content, 'app_start':app_start
+            },
+            success: function(response){
+               if(response.status=='1'){
+                  var dialog = bootbox.dialog({
+                     message: '<p class="text-center">Perbaharui data...</p>',
+                     closeButton: false
+                  });
+                  
+                  setTimeout(function(){
+                     dialog.modal('hide');
+                  }, 1000);
+                  
+                  dialog.on('hidden.bs.modal', function () {
+                     location.href = "/logout";
+                  });
+               }else{
+                  msg_alert_warning('Data gagal diperbaharui !', '#debugs');
+               }
+            },
+            error: function(error){
+               console.log(error);
+               waitingDialog.hide();
+               msg_alert_warning('Data gagal diperbaharui !', '#debugs');
+            }
+      });
+   };
+</script>

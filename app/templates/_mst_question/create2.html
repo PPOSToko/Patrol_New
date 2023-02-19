@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='img/apple-icon.png') }} ">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/cj logo 2.png') }} ">
+  <title>Q-Patrol</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link id="pagestyle" href="{{ url_for('static', filename='css/nucleo-icons.css') }}"  rel="stylesheet" />
+  <link id="pagestyle" href="{{ url_for('static', filename='css/nucleo-svg.css') }}"  rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link id="pagestyle" href="{{ url_for('static', filename='css/material-dashboard.css') }}"  rel="stylesheet" />
+</head>
+<body class="g-sidenav-show  bg-gray-100">
+  <hr class="horizontal light mt-0 mb-2">
+  <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <ul class="navbar-nav"> 
+        <li class="nav-item">
+          <a class="nav-link text-white active bg-gradient-primary" href="/home">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">dashboard</i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">      
+          <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+            <div><i class="material-icons opacity-10">manage_history
+            </i></div>
+            <div class="sb-sidenav-collapse-arrow"></div>
+            <span class="nav-link-text ms-3">Manage Question</span>
+          </a>    
+        </li>
+        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+          <nav class="sb-sidenav-menu-nested nav">
+              <li class="nav-item"> 
+                  <ul class="nested">
+                      <a class="nav-link" href="create.html">
+                          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                              <i class="material-icons opacity-10">note_add</i>
+                          </div>
+                          <span class="nav-link-text ms-1">Search Question</span>
+                      </a>
+                  </ul>
+              </li> 
+          </nav>
+        </div> 
+        <ul class="navbar-nav"> 
+          <li class="nav-item">
+            <a class="nav-link text-white " href="start.html">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">start</i>
+              </div>
+              <span class="nav-link-text ms-1">Start New Patrol</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav"> 
+            <li class="nav-item">
+              <a class="nav-link text-white " href="continue.html">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10">arrow_right</i>
+                </div>
+                <span class="nav-link-text ms-1">Continue unfinished</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                <div><i class="material-icons opacity-10">reviews</i></div>
+                <div class="sb-sidenav-collapse-arrow"></div>
+                <span class="nav-link-text ms-3">Review Patrol</span>
+              </a>    
+            </li>
+            <div class="collapse" id="collapsePages" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav accordion">
+                        <li class="nav-item"> 
+                            <ul class="nested">
+                                <a class="nav-link" href="view_patrol.html">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">preview</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">View Patrol detail</span>
+                                </a>
+                            </ul>
+                          </li> 
+                          <li class="nav-item"> 
+                            <ul class="nested">
+                                <a class="nav-link" href="revise.html">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">article</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Revise Patrol result</span>
+                                </a>
+                            </ul>
+                          </li> 
+                  </nav>
+            </div>
+        </ul>
+    </div>
+<!--batas menu  -->
+  
+
+<main class="main-content border-radius-lg ">
+        
+<!-- Navbar -->
+
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+      <nav aria-label="breadcrumb">
+        
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <!-- <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li> -->
+          <!-- <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Create New Question</li> -->
+        </ol>
+      
+      </nav>
+      <ul class="navbar-nav  justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/home">
+              
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10 ">home</i>
+                  <span class="nav-link-text ms-1">Home</span>
+                </div>  
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="/logout">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="material-icons opacity-10">logout</i>
+                  <span class="nav-link-text ms-1">Sign Out</span>
+                </div>
+            </a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- End Navbar -->
+  
+
+          
+  <!-- isi menu -->
+  <div class ="mask gradient-custom"></div>
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="card">
+          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+              <div class="card-header p-3 pt-2"></div> 
+          </div>
+      
+          <div class="text-end pt-0">
+            <p><button class="btn btn-info"   data-bs-toggle="modal" data-bs-target="#pertanyaanModal" type="button" onclick="create_pertanyaan()">Create new question</button></p> 
+          </div>
+          
+          <div class="row">
+              <div class="col-md-6">
+                <div class="input-group input-group-static mb">
+                    <label for="exampleFormControlSelect1" class="ms-0">Induk</label>
+                    <select class="form-control" id="induk">
+                      <option value="0"></option>
+                      <option value="2">Field Head Printing</option>
+                      <option value="3">Ink</option>
+                      <option value="4">Tooling</option>
+                      <option value="5">Printing</option>
+                      <option value="1">Production Finishing</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group input-group-static mb-3">
+                    <label for="exampleFormControlSelect1" class="ms-0">Point</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                      <option value="">DOKUMEN ACUAN KERJA - PRA CETAK</option>
+                      <option>METODE KERJA - SET UP MESIN</option>
+                      <option>METODE KERJA - SET UP AVT</option>
+                      <option>METODE KERJA - DEFECT HANDLING</option>
+                      <option>METODE KERJA - PEMERIKSAAN KUALITAS</option>
+                    </select>
+                  </div>
+            </div>
+          
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Pertanyaan</label>
+                  <input type="pertanyaan" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Std. Jawaban</label>
+                  <input type="std" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-info" type="button">Search</button>
+            </div>
+              
+          </div>
+          
+          <div class="container-fluid py-4">
+            
+            <div class="row">
+                  <div class="col-12">
+                      <div class="card my-4  ">
+                          <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2" >
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                    <h6 class="text-white text-capitalize ps-3">Manage Question Table</h6>
+                                </div>
+                              </div>
+                              <div class="card-body px-0 pb-2">
+                                <div class="table-responsive p-0" >
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                          <tr>
+                                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">ID</th>
+                                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12 ps-2">Induk</th>
+                                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Point</th>
+                                              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Pertanyaan</th>
+                                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12 ps-2">Std. Jawaban</th>
+                                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12 ps-2">Eff. From</th>
+                                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12 ps-2">Eff. To</th>
+                                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Act.</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                              <td>
+                                                  <div class="d-flex px-2 py-1"> 
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                      <h6 class="mb-0 text-sm">1</h6>
+                                                    </div>
+                                                  </div>
+                                              </td>
+                                              <td>
+                                                <p class="text-xs font-weight-bold mb-0">Printing</p>
+                                              </td>
+                                              <td class="align-middle text-center text-sm">
+                                                  <p class="text-xs font-weight-bold mb-0">Document Acuan Kerja-Pra Cetak</p>
+                                              </td>
+                                              <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">Apa saja verifikasi yang dilakukan pada saat preparation document Tooling?				</span>
+                                              </td>
+                                              <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">- Form Pre-Setup
+                                                - Dokumen Job Folder			</span>
+                                              </td>
+                                              <td class="align-middle text-center text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">21/10/2022</p>
+                                              </td>
+                                              <td class="align-middle text-center text-sm">
+                                                <p class="text-xs font-weight-bold mb-0">24/10/2022</p>
+                                              </td>
+                                              <td class="align-middle">
+                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                  Edit
+                                                </a>
+                                              </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div id='loadform'></div>   
+          </div>
+          
+    </div>
+    
+  </main>
+  
+  <!-- <div id='loadform'></div> -->
+<!-- batas isi -->
+
+  <script>
+    $(document).ready(function(){
+      $("#myBtn").click(function(){
+        $("#myModal").modal({backdrop: true});
+      });
+      $("#myBtn2").click(function(){
+        $("#pertanyaanModal").modal({backdrop: false});
+      });
+      $("#myBtn3").click(function(){
+        $("#myModal3").modal({backdrop: "static"});
+      });
+    });
+  </script>
+
+  <!--   Core JS Files   -->
+  <!-- <script src="./assets/js/core/popper.min.js" ></script> -->
+  <!-- <script src="./assets/js/core/bootstrap.min.js" ></script> -->
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/core/popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/core/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/plugins/perfect-scrollbar.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/plugins/smooth-scrollbar.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/plugins/chartjs.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/funct.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+    var myModal = document.getElementById('myModal')
+  var myInput = document.getElementById('myInput')
+
+  myModal.addEventListener('shown.bs.modal', function () {
+    myInput.focus()
+  })
+  const body = document.querySelector('body'),
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle"),
+        searchBtn = body.querySelector(".search-box"),
+        modeSwitch = body.querySelector(".toggle-switch"),
+        modeText = body.querySelector(".mode-text");
+
+
+  toggle.addEventListener("click" , () =>{
+      sidebar.classList.toggle("close");
+  })
+
+  searchBtn.addEventListener("click" , () =>{
+      sidebar.classList.remove("close");
+  })
+
+  modeSwitch.addEventListener("click" , () =>{
+      body.classList.toggle("dark");
+      
+      if(body.classList.contains("dark")){
+          modeText.innerText = "Light mode";
+      }else{
+          modeText.innerText = "Dark mode";
+          
+      }
+  });
+  function create_pertanyaan(){
+    // alert("Munculkan Pertanyaan");
+    // load_page('/detilpertanyaan', {
+    //               'link':'/_mst_question/fquestion.html', 'com':'update'}, '#loadform');
+
+    load_page('/openform', {'link':'/_mst_question/fquestion.html', 'com':'create'}, '#loadform');
+
+  }
+  </script>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="{{ url_for('static', filename='js/material-dashboard.min.js') }}"></script>
+</body>
+
+</html>

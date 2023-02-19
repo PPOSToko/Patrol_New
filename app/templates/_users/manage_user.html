@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Q-Patrol</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+       
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+        <!-- Nucleo Icons -->
+        <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+        <!-- Font Awesome Icons -->
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <!-- material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <!-- CSS Files -->
+        <link id="pagestyle" href="{{ url_for('static', filename='css/material-dashboard.css') }}"  rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script
+        src="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/js/jquery.smartWizard.min.js"
+        type="text/javascript"
+        ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+        <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"
+        ></script>
+    </head>
+    <body class="g-sidenav-show  bg-gray-100">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+          <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+            </nav>
+            <ul class="navbar-nav  justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/home">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10 ">home</i>
+                      <span class="nav-link-text ms-1">Home</span>
+                    </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white " href="/logout">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="material-icons opacity-10">logout</i>
+                      <span class="nav-link-text ms-1">Sign Out</span>
+                    </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>     
+        <div class ="mask gradient-custom"></div>
+        <div class="container-fluid py-4">
+                <div class="card my-4">
+                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2" >
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                      <h6 class="text-white text-capitalize ps-3">Manage User</h6>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                      <!-- <div class="form-group">
+                        <a href="/createuser"><button  class="btn btn-info" type="button"> Create User</button></a>
+                      </div>       -->
+                  </div>
+                      
+                      <div class="container-fluid py-4">
+                        <div class="row">
+                                <div class="table-responsive p-0">
+                                  <table id="tbllistuser" class="table align-items-center mb-0">
+                                    <thead>
+                                      <tr>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left ">ID user</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left ">Nama user</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left">Level</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left">Status</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder mb-0 text-left">Action</th>
+                                      </tr>
+                                    </thead>
+                                  </table>
+                                </div>
+                        </div>
+                      </div>
+                  <footer class="footer">
+                    <div class="container-fluid">
+                      <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-12mb-lg-0 mb-4">
+                          <div class="copyright text-center text-sm text-muted text-shadow">
+                            <center><a href="http://192.168.30.3/support/" class="font-weight-bold" target="_blank" style="color: rgb(0, 0, 0);">Copyright ©IT - PT.Cahayajakarta @2022</a></center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </footer>
+                </div>
+        </div>
+    </body>
+    <script>
+        function reset(userid) {
+                bootbox.confirm({
+                message: 'Apa kamu yakin ingin Reset password ?',
+                buttons: {
+                    confirm: {
+                        label: 'Yes',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    // console.log('This was logged in the callback: ' + result);
+                    if (result==true){
+                      $.ajax({
+                          type    : 'POST',
+                          url     : '/resetpassword',
+                          dataType: 'json',
+                          data    : {
+                              'userid':userid
+                          },
+                          success : function(response){
+                              waitingDialog.hide();
+                              if(response.status=='1'){
+                                  $('#lama').val('');
+                                  $('#baru1').val('');
+                                  $('#baru2').val('');
+                                  var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                  var box = bootbox.alert(msg);
+                                  box.on('hidden.bs.modal', function(){
+                                      document.location.href = "/home";
+                                  });
+                              }else{
+                                  msg_alert_warning(response.msg, '#lama');
+                              }
+                          },
+                          error: function(error){
+                              console.log(error);
+                              waitingDialog.hide();
+                              if(error.status == 403){
+                                  msg_server_reloading();
+                              }else{
+                                  msg_alert_warning('Data gagal diproses !', '#lama');
+                              }
+                          }
+                      })
+
+
+                      }
+                  }
+              });     
+        };
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/chartjs.min.js') }}"></script>
+    
+    
+    <script src="{{ url_for('static', filename='js/bootbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/funct.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/create.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.colVis.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.tableTools.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+
+
+
+    <script src="{{ url_for('static', filename='js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/jquery-validate/jquery.validate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins/masked-input/jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+    <script>
+      $(document).ready(function(){
+        
+        show_user();
+      });
+      function show_user(){
+        var table = $('#tbllistuser').DataTable({
+          "ajax":{
+              "url":"/viewlistuser",
+              // "data": function(d){
+              //         d.induk = cnminduk,d.point=cnmpoint;
+              //   },
+              "error": function(){
+                  msg_server_reloading();
+              }
+            },
+            "columns":[
+              {"data": "username", "className":"align-middle text-left text-sm",  "targets":"0"},
+              {"data": "nama","className":"align-middle text-left text-sm", "targets":"1"},
+              {"data": "level", "className":"align-middle text-left text-sm text-wrap","targets":"2"},
+              {"data": "status","className":"align-middle text-left text-sm text-wrap","targets":"4"},
+              {"data": null, "orderable": false, "className":"text-center", "width":"5%", "targets":"5",
+                  "render":function(data){
+                    return '<button id="bDetil" data-toggle="tooltip" data-placement="left"  data-original-title="Resume" style="background:initial;border:none;" >'+
+                          '<i class="fa fa-refresh txt-color-blue"></i>'+
+                          '</button>'+
+                          '<button id="bAktif" data-toggle="tooltip" data-placement="left"  data-original-title="Resume" style="background:initial;border:none;" >'+
+                          '<i class="fa fa-window-close-o txt-color-blue"></i>'+
+                          '</button>';
+                  }
+              }
+            ],
+            "destroy": true,
+            "searching": false,
+            "bInfo": false,
+            "deferRender": true,
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+              "t"+
+              "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "oLanguage": {
+              "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+              "sInfo": "Total : _TOTAL_ Data",
+              "sInfoEmpty":"Total : _MAX_ data",
+              "sInfoFiltered":"",
+              "sLengthMenu": "_MENU_",
+              "sZeroRecords": "<strong class='text-danger'><i class='fa fa-warning'></i> Data tidak ditemukan !</strong>",
+              "sLoadingRecords": "<strong><i class='fa fa-spinner fa-spin'></i> Memuat data ...</strong>",
+              "sEmptyTable": "<strong class='text-danger'><i class='fa fa-warning'></i> Tidak ada data !</strong>",
+              "oPaginate": {
+                  "sNext":">",
+                  "sPrevious":"<"
+              }
+            },
+            "order": [0, "asc"],
+            // // "sScrollY": auto_height_table('#showklasifikasipsn'),
+            "autoWidth" : false,
+            "responsive": true,
+            "ordering": false,
+            "lengthChange": true,
+            
+
+        });
+        $('#tbllistuser tbody').on( 'click', 'button', function(){
+            var data = table.row($(this).closest('tr')).data();
+            if(this.id=='bDetil'){
+              // window.location.href = '/mulaipatrol?idpatrol=' + data.id_patrol;
+              reset(data.username);
+            }else if(this.id=='bAktif'){
+                var userid = data.username;
+                bootbox.prompt({
+                    title: 'Pilih status User',
+                    inputType: 'select',
+                    inputOptions: [{
+                        text: 'Pilih status user',
+                        value: ''
+                    },
+                    {
+                        text: 'Aktif',
+                        value: '1'
+                    },
+                    {
+                        text: 'Non Aktif',
+                        value: '0'
+                    }],
+                    callback: function (result) {
+                        if (result !=""){
+                          $.ajax({
+                              type    : 'POST',
+                              url     : '/nonaktifuser',
+                              dataType: 'json',
+                              data    : {
+                                  'userid':userid,'status':result
+                              },
+                              success : function(response){
+                                  waitingDialog.hide();
+                                  if(response.status=='1'){
+                                      $('#lama').val('');
+                                      $('#baru1').val('');
+                                      $('#baru2').val('');
+                                      var msg = "<h6><i class='fa fa-info-circle text-primary'></i>&nbsp;"+response.msg+"</h6>";
+                                      var box = bootbox.alert(msg);
+                                      box.on('hidden.bs.modal', function(){
+                                        show_user();
+                                          // document.location.href = "/home";
+                                      });
+                                  }else{
+                                      msg_alert_warning(response.msg, '#lama');
+                                  }
+                              },
+                              error: function(error){
+                                  console.log(error);
+                                  waitingDialog.hide();
+                                  if(error.status == 403){
+                                      msg_server_reloading();
+                                  }else{
+                                      msg_alert_warning('Data gagal diproses !', '#lama');
+                                  }
+                              }
+                          })
+
+
+                        }
+                        // console.log(result);
+                    }
+                });              
+              }
+        });
+
+      }
+
+
+    </script>
+
+</html>
